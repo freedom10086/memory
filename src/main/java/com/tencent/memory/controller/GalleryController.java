@@ -15,7 +15,7 @@ public class GalleryController {
     }
 
     // 获取指定相册
-    @GetMapping("galleries/{galleryId}/")
+    @GetMapping("galleries/{galleryId}")
     public Gallery getGallery(@PathVariable("galleryId") long galleryId) {
 
         return null;

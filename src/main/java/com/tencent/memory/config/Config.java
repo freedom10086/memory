@@ -15,9 +15,11 @@ public class Config {
     public static final String secretKey = "QfkmeLqCNNDuSp12xiIiU7ZszwjKjwzr";
     public static final String tokenSecretKey = "QfkmeLqCNNDuSp12xiIiU7ZszwjKjwzr";
     public static final String bucketName = "image";
+    public static final String bucketNameWithId = "image-1251023989";
 
-    //image-1251023989
-    //广州（华南）	ap-guangzhou	<bucketname-APPID>.cos.ap-guangzhou.myqcloud.com
+    public static final String uploadPrefix = "image/";
+    public static final String bucketPathPrefix = "https://" + bucketNameWithId + ".cosgz.myqcloud.com/" + uploadPrefix;
+    public static final String bucketPathCdnPrefix = "https://" + bucketNameWithId + ".file.myqcloud.com/" + uploadPrefix;
 
 
     public static final String qqAndroidAppId = "1106924490";

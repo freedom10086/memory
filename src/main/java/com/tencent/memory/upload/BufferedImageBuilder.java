@@ -12,7 +12,6 @@ public class BufferedImageBuilder {
     public static BufferedImage toBufferedImage(Image image) {
 
         if (image instanceof BufferedImage) {
-
             return (BufferedImage) image;
         }
 

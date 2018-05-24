@@ -17,7 +17,7 @@ package com.tencent.memory.storage;
 
 import java.util.Random;
 
-import com.tencent.memory.config.StorageProperties;
+import com.tencent.memory.config.UploadConfig;
 import com.tencent.memory.upload.FileSystemStorageService;
 import com.tencent.memory.upload.StorageException;
 import org.junit.Before;
@@ -34,7 +34,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class FileSystemStorageServiceTests {
 
-    private StorageProperties properties = new StorageProperties();
+    private UploadConfig properties = new UploadConfig();
     private FileSystemStorageService service;
 
     @Before

@@ -14,9 +14,9 @@ public class MemoryApplication {
     }
 
     @Bean
-    CommandLineRunner init() {
+    CommandLineRunner init(StorageService storageService) {
         return (args) -> {
-
+            storageService.init();
         };
     }
 }
