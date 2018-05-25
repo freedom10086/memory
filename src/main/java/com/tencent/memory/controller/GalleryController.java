@@ -5,6 +5,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ *  处理相册Controller
+ *  对相册的增删该查
+ */
 @RestController
 public class GalleryController {
 
@@ -34,23 +38,5 @@ public class GalleryController {
     public Gallery delGallery(@PathVariable("galleryId") long galleryId) {
         return null;
     }
-
-    // 给相册添加图片
-    @PostMapping("/gallerirs/{galleryId}")
-    public Gallery addImageToGallery(@PathVariable("galleryId") long galleryId) {
-        return null;
-    }
-
-    // 从相册删除图片
-    @DeleteMapping("/galleries/{galleryId}/{imageId}")
-    public Gallery delImageFromGallery(@PathVariable("galleryId") long galleryId,
-
-                                       @PathVariable("imageId") long imageId) {
-        return null;
-
-    }
-
-
-
 
 }

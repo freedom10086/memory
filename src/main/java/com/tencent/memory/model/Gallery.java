@@ -1,10 +1,15 @@
 package com.tencent.memory.model;
 
+import java.time.LocalDateTime;
+
 public class Gallery {
     public long id;
     public String name;
-    public String descrption;
-    public long creater;
-    public String created;
-    public String updated;
+    public String description;
+    public User creater;
+    public LocalDateTime created;
+    public LocalDateTime updated;
+
+    public Gallery() {
+    }
 }

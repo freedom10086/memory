@@ -1,4 +1,4 @@
-package com.tencent.memory.db;
+package com.tencent.memory.dao;
 
 import com.tencent.memory.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
