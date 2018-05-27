@@ -3,9 +3,10 @@ package com.tencent.memory.controller;
 import com.tencent.memory.config.Config;
 import com.tencent.memory.model.ApiResult;
 import com.tencent.memory.model.ApiResultBuilder;
+import com.tencent.memory.model.UploadResult;
 import com.tencent.memory.upload.CosStorageService;
 import com.tencent.memory.upload.StorageFileNotFoundException;
-import com.tencent.memory.upload.StorageService;
+import com.tencent.memory.service.UploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +32,14 @@ public class UploadController {
 
     private static final Logger logger = LoggerFactory.getLogger(UploadController.class);
 
-    private final StorageService storageService;
+    private final UploadService storageService;
 
     @Autowired
-    public UploadController(@Qualifier("CosStorageService") StorageService storageService) {
+    public UploadController(@Qualifier("CosStorageService") UploadService storageService) {
         this.storageService = storageService;
     }
 
-    @GetMapping("/files")
+    @GetMapping("/files/")
     @ResponseBody
     public List<String> listUploadedFiles() throws IOException {
         return storageService.loadAll().map(
@@ -55,16 +56,17 @@ public class UploadController {
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 
-    @PostMapping("/files")
+    @PostMapping("/files/")
     @ResponseBody
-    public ApiResult<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
+    public ApiResult<UploadResult> handleFileUpload(@RequestParam("file") MultipartFile file) {
         long start = System.currentTimeMillis();
-        String path = storageService.store(file);
+        UploadResult result = storageService.store(file);
         logger.info("upload cost: {}ms", System.currentTimeMillis() - start);
         if (storageService instanceof CosStorageService) {
-            return new ApiResultBuilder<String>().success(Config.bucketPathCdnPrefix + path + ".jpg").build();
+            return new ApiResultBuilder<UploadResult>().success(result).build();
         } else {
-            return new ApiResultBuilder<String>().success(file.getOriginalFilename()).build();
+            //file.getOriginalFilename()
+            return new ApiResultBuilder<UploadResult>().success(result).build();
         }
 
     }

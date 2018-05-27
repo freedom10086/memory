@@ -1,16 +1,17 @@
-package com.tencent.memory.upload;
+package com.tencent.memory.service;
 
+import com.tencent.memory.model.UploadResult;
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
-public interface StorageService {
+public interface UploadService {
 
     void init();
 
-    String store(MultipartFile file);
+    UploadResult store(MultipartFile file);
 
     Stream<Path> loadAll();
 

@@ -1,8 +1,11 @@
 package com.tencent.memory.upload;
 
+import com.qcloud.cos.transfer.Upload;
 import com.tencent.memory.config.Config;
 import com.tencent.memory.config.UploadConfig;
 import com.tencent.memory.model.MyException;
+import com.tencent.memory.model.UploadResult;
+import com.tencent.memory.service.UploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +26,7 @@ import java.util.stream.Stream;
  */
 
 @Service("CosStorageService")
-public class CosStorageService implements StorageService {
+public class CosStorageService implements UploadService {
 
     @Autowired
     private UploadConfig properties;
@@ -37,7 +40,7 @@ public class CosStorageService implements StorageService {
     }
 
     @Override
-    public String store(MultipartFile file) {
+    public UploadResult store(MultipartFile file) {
         long size = file.getSize();
         String contentType = file.getContentType();
         byte[] data;
@@ -48,17 +51,17 @@ public class CosStorageService implements StorageService {
         }
 
         // 上传缩略图
-        Future<String> ft = null;
+        Future<UploadResult> ft = null;
         if (properties.isEnableThumbnail() && size > properties.getThumbnailLimitSize()) {
             ft = executor.submit(new UploadTask(data, contentType, true,
                     properties.getMaxThumbnailWidth(), properties.getMaxThumbnailHeight()));
         }
 
         // 上传原图
-        Future<String> f = executor.submit(new UploadTask(data, contentType, false,
+        Future<UploadResult> f = executor.submit(new UploadTask(data, contentType, false,
                 properties.getMaxThumbnailWidth(), properties.getMaxThumbnailHeight()));
         try {
-            String s = f.get();
+            UploadResult s = f.get();
             if (ft != null) {
                 s = ft.get();
             }

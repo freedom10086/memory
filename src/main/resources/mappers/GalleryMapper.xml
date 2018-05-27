@@ -12,12 +12,12 @@
         <association property="creater" resultMap="userMap"/>
     </resultMap>
 
-    <!--<resultMap id="userMap" type="User">-->
-        <!--<id column="id" jdbcType="BIGINT" property="id"/>-->
-        <!--<result column="openId" jdbcType="VARCHAR" property="openId"/>-->
-        <!--<result column="name" jdbcType="VARCHAR" property="name"/>-->
-        <!--<result column="avatar" jdbcType="VARCHAR" property="avatar"/>-->
-        <!--<result column="gender" jdbcType="VARCHAR" property="gender"/>-->
-        <!--<result column="created" jdbcType="TIMESTAMP" property="created"/>-->
-    <!--</resultMap>-->
+    <resultMap id="userMap" type="User">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="openId" jdbcType="VARCHAR" property="openId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="gender" jdbcType="VARCHAR" property="gender"/>
+        <result column="created" jdbcType="TIMESTAMP" property="created"/>
+    </resultMap>
 </mapper>

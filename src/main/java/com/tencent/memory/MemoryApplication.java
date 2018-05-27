@@ -1,6 +1,6 @@
 package com.tencent.memory;
 
-import com.tencent.memory.upload.StorageService;
+import com.tencent.memory.service.UploadService;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,7 +16,7 @@ public class MemoryApplication {
     }
 
     @Bean
-    CommandLineRunner init(StorageService storageService) {
+    CommandLineRunner init(UploadService storageService) {
         return (args) -> {
             storageService.init();
         };

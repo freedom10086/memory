@@ -12,6 +12,7 @@ import com.qcloud.cos.model.StorageClass;
 import com.qcloud.cos.region.Region;
 import com.tencent.memory.config.Config;
 import com.tencent.memory.model.MyException;
+import com.tencent.memory.model.UploadResult;
 import net.coobird.thumbnailator.Thumbnails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,7 @@ import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.concurrent.Callable;
 
-public class UploadTask implements Callable<String> {
+public class UploadTask implements Callable<UploadResult> {
 
     private static final Logger logger = LoggerFactory.getLogger(UploadTask.class);
 
@@ -43,7 +44,7 @@ public class UploadTask implements Callable<String> {
     }
 
     @Override
-    public String call() throws Exception {
+    public UploadResult call() throws Exception {
         long size = data.length;
         if (thumbnail) {
             double quality = 1.0f;
@@ -75,13 +76,17 @@ public class UploadTask implements Callable<String> {
         String destDir = Config.uploadPrefix + dateTime.getYear() + "/" + dateTime.getMonthValue() + "/" + dateTime.getDayOfMonth() + "/";
         String destFile = destDir + System.currentTimeMillis() + (thumbnail ? "S" : "");
 
-        doUpload(inputStream, destFile + ".jpg", size);
+        String etag = doUpload(inputStream, destFile + ".jpg", size);
 
-        return destFile.substring(Config.uploadPrefix.length());
+        UploadResult result = new UploadResult();
+        result.url = Config.bucketPathCdnPrefix + destFile.substring(Config.uploadPrefix.length()) + ".jpg";
+        result.etag = etag;
+
+        return result;
     }
 
     // 调用腾讯云sdk上传图片
-    private void doUpload(InputStream inputStream, String savePath, long fileSize) {
+    private String doUpload(InputStream inputStream, String savePath, long fileSize) {
         // 1 初始化用户身份信息(secretId, secretKey)
         COSCredentials cred = new BasicCOSCredentials(Config.secretId, Config.secretKey);
         // 2 设置bucket的区域, COS地域的简称请参照 https://www.qcloud.com/document/product/436/6224
@@ -105,6 +110,7 @@ public class UploadTask implements Callable<String> {
             // putobjectResult会返回文件的etag
             String etag = putObjectResult.getETag();
             logger.info("upload success path:{} etag:{}", savePath, etag);
+            return etag;
         } catch (CosClientException e) {
             throw new MyException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
         } finally {

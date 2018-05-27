@@ -11,8 +11,8 @@ import java.util.List;
 @Component
 public interface ImageMapper {
 
-    @Insert("INSERT INTO image(galleryId,url,creater,description) VALUES " +
-            "(#{galleryId},#{url},#{creater.id},#{description})")
+    @Insert("INSERT INTO image(galleryId,groupId,url,creater,description) VALUES " +
+            "(#{galleryId},#{groupId},#{url},#{creater.id},#{description})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insert(Image image);
 

@@ -4,13 +4,12 @@ import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 import com.tencent.memory.upload.StorageFileNotFoundException;
-import com.tencent.memory.upload.StorageService;
+import com.tencent.memory.service.UploadService;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -36,7 +35,7 @@ public class FileUploadTests {
     private MockMvc mvc;
 
     @MockBean
-    private StorageService storageService;
+    private UploadService storageService;
 
     @Test
     public void shouldListAllFiles() throws Exception {

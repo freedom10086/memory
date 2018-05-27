@@ -60,13 +60,9 @@ public class Token {
 
 
     //验证token 签名是否一致
-    public static Token decodeToken(String token, String secretKey) {
+    public static Token decodeToken(String token, String secretKey) throws IOException {
         String data = valid(token, secretKey);
-        try {
-            return new ObjectMapper().readValue(data, Token.class);
-        } catch (IOException e) {
-            throw new MyException(e);
-        }
+        return new ObjectMapper().readValue(data, Token.class);
     }
 
     protected static String valid(String token, String secretKey) {

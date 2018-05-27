@@ -1,7 +1,7 @@
 package com.tencent.memory;
 
 
-import com.tencent.memory.upload.StorageService;
+import com.tencent.memory.service.UploadService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class FileUploadIntegrationTests {
     private TestRestTemplate restTemplate;
 
     @MockBean
-    private StorageService storageService;
+    private UploadService storageService;
 
     @LocalServerPort
     private int port;

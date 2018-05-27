@@ -10,48 +10,54 @@ import java.util.List;
 @Component
 public interface GalleryMapper {
 
-    @Insert("INSERT INTO gallery(name,description,creater) VALUES " +
-            "(#{name},#{description},#{creater.id})")
+    @Insert("INSERT INTO gallery(name,description,type,creater) VALUES " +
+            "(#{name},#{description},#{type},#{creater.id})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insert(Gallery gallery);
 
     @Select("SELECT * FROM gallery " +
             "inner join user on user.id = gallery.creater " +
             "WHERE gallery.id = #{id}")
-    @ResultMap("com.tencent.memory.dao.GalleryMapper.galleryMap")  // 引用XML里配置的映射器
+    @ResultMap("com.tencent.memory.dao.GalleryMapper.galleryMap")
+        // 引用XML里配置的映射器
     Gallery findById(@Param("id") int id);
 
+    // 搜索我的所有相册
     @Select("SELECT * FROM gallery " +
             "inner join user on user.id = gallery.creater " +
-            "where name like %#{name}% limit #{size} offset #{start} order by id #{order}")
+            "inner join user_gallery on user_gallery.galleryId = gallery.id " +
+            "where gallery.id in (select user_gallery.galleryId from user_gallery where user_gallery.uid = #{uid}) " +
+            "and (gallery.name like %#{name}% or gallery.description like %#{name}%) " +
+            "order by user_gallery.created ${order} " +
+            "limit #{size} offset #{start}")
     @ResultMap("com.tencent.memory.dao.GalleryMapper.galleryMap")
-    List<Gallery> searchByName(@Param("name") String name,
+    List<Gallery> searchByName(@Param("uid") long uid, @Param("name") String name,
                                @Param("start") int start, @Param("size") int size,
                                @Param("order") String order);
 
 
+    // 获取我的所有相册
     @Select("SELECT * FROM gallery " +
             "inner join user on user.id = gallery.creater " +
-            "limit #{size} offset #{start} order by id #{order}")
+            "inner join user_gallery on user_gallery.galleryId = gallery.id " +
+            "where gallery.id in (select user_gallery.galleryId from user_gallery where user_gallery.uid = #{uid}) " +
+            "order by user_gallery.created ${order} " +
+            "limit #{size} offset #{start}")
     @ResultMap("com.tencent.memory.dao.GalleryMapper.galleryMap")
-    List<Gallery> getAllByCreated(@Param("start") int start, @Param("size") int size,
-                                  @Param("order") String order);
-
-    @Select("SELECT * FROM gallery inner " +
-            "join user on user.id = gallery.creater " +
-            "limit #{size} offset #{start} order by updated #{order}")
-    @ResultMap("com.tencent.memory.dao.GalleryMapper.galleryMap")
-    List<Gallery> getAllByUpdated(@Param("start") int start, @Param("size") int size,
+    List<Gallery> getAllByCreated(@Param("uid") long uid,
+                                  @Param("start") int start, @Param("size") int size,
                                   @Param("order") String order);
 
 
     @Update("UPDATE gallery SET name = #{name}, " +
             "description = #{description}, " +
+            "type = #{type}, " +
             "updated = now() " +
             "WHERE id = #{id}")
     int update(Gallery gallery);
 
 
+    // 真正的删除要小心
     @Delete("delete from gallery where id = #{id}")
-    int delete(@Param("id") int id);
+    int delete(@Param("id") long id);
 }

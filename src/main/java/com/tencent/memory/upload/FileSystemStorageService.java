@@ -10,6 +10,8 @@ import java.nio.file.StandardCopyOption;
 import java.util.stream.Stream;
 
 import com.tencent.memory.config.UploadConfig;
+import com.tencent.memory.model.UploadResult;
+import com.tencent.memory.service.UploadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.Resource;
@@ -22,7 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @Primary
-public class FileSystemStorageService implements StorageService {
+public class FileSystemStorageService implements UploadService {
 
     private final Path rootLocation;
 
@@ -32,7 +34,7 @@ public class FileSystemStorageService implements StorageService {
     }
 
     @Override
-    public String store(MultipartFile file) {
+    public UploadResult store(MultipartFile file) {
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
         try {
             if (file.isEmpty()) {
@@ -46,11 +48,12 @@ public class FileSystemStorageService implements StorageService {
             }
             Path path = this.rootLocation.resolve(filename);
             try (InputStream inputStream = file.getInputStream()) {
-                Files.copy(inputStream, path,
-                        StandardCopyOption.REPLACE_EXISTING);
+                Files.copy(inputStream, path, StandardCopyOption.REPLACE_EXISTING);
             }
 
-            return path.toString();
+            UploadResult result = new UploadResult();
+            result.url = path.toString();
+            return  result;
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + filename, e);
         }
