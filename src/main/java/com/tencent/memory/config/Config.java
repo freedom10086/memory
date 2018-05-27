@@ -24,4 +24,7 @@ public class Config {
 
     public static final String qqAndroidAppId = "1106924490";
     public static final String qqAndroidAppKey = "x7eg1wJDzGOifzo6";
+
+    public static final String qqIosAppId = "1106849099";
+    public static final String qqIosAppKey = "oC2PgYz6lOkzalLh";
 }

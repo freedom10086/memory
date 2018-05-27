@@ -37,6 +37,7 @@ public class LoginController {
     @ResponseBody
     public ApiResult<User> login(@RequestParam("openid") String openid,
                                  @RequestParam("access_token") String accessToken) {
+        logger.info("openId:{} access_token:{}", openid, accessToken);
         User user = userMapper.findByOpenId(openid);
         if (user == null) {
             //用户不存在创建用户
@@ -75,7 +76,7 @@ public class LoginController {
                         "access_token=%s&" +
                         "oauth_consumer_key=%s&" +
                         "openid=%s&format=json",
-                accessToken, Config.qqAndroidAppId, openId);
+                accessToken, Config.qqIosAppId, openId);
 
         Request request = new Request.Builder()
                 .url(url)
