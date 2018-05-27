@@ -2,13 +2,17 @@ package com.tencent.memory.service;
 
 
 import com.tencent.memory.dao.GalleryMapper;
+import com.tencent.memory.dao.ImageMapper;
 import com.tencent.memory.dao.UserGalleryMapper;
 import com.tencent.memory.model.Gallery;
+import com.tencent.memory.model.Image;
+import com.tencent.memory.model.ImageGroup;
 import com.tencent.memory.model.Order;
 import com.tencent.memory.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,13 +20,41 @@ public class GalleryServiceImpl implements GalleryService {
 
     private final GalleryMapper galleryMapper;
     private final UserGalleryMapper userGalleryMapper;
+    private final ImageMapper imageMapper;
 
 
     @Autowired
     public GalleryServiceImpl(GalleryMapper galleryMapper,
-                              UserGalleryMapper userGalleryMapper) {
+                              UserGalleryMapper userGalleryMapper,
+                              ImageMapper imageMapper) {
         this.galleryMapper = galleryMapper;
         this.userGalleryMapper = userGalleryMapper;
+        this.imageMapper = imageMapper;
+    }
+
+    // 数据库不分页
+    // 代码分页
+    @Override
+    public Gallery loadGallery(long galleryId) {
+        Gallery gallery = galleryMapper.findById(galleryId);
+        if (gallery != null) {
+            List<Image> images = imageMapper.getAllByGallery(galleryId, Order.DESC.value);
+            //代码分组
+            List<ImageGroup> imageGroups = new ArrayList<>();
+            for (Image image : images) {
+                if (imageGroups.size() > 0 && imageGroups.get(imageGroups.size() - 1).id == image.groupId) {
+                    imageGroups.get(imageGroups.size() - 1).addImage(image);
+                } else {
+                    ImageGroup g = new ImageGroup();
+                    g.addImage(image);
+                    g.creater = image.creater;
+                    imageGroups.add(g);
+                }
+            }
+            gallery.images = imageGroups;
+        }
+
+        return gallery;
     }
 
     @Override

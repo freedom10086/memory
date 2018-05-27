@@ -20,7 +20,7 @@ public interface GalleryMapper {
             "WHERE gallery.id = #{id}")
     @ResultMap("com.tencent.memory.dao.GalleryMapper.galleryMap")
         // 引用XML里配置的映射器
-    Gallery findById(@Param("id") int id);
+    Gallery findById(@Param("id") long id);
 
     // 搜索我的所有相册
     @Select("SELECT * FROM gallery " +

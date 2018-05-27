@@ -12,10 +12,11 @@ public class Image {
     public long groupId;
 
     public String url;
-    public String created;
     public User creater;
     public String description;
 
     public int likes;
     public int comments;
+
+    public String created;
 }

@@ -22,8 +22,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public FilterRegistrationBean authFilterRegistration() {
         FilterRegistrationBean<AuthFilter> registration = new FilterRegistrationBean<>();
         registration.setFilter(new AuthFilter());
-        registration.addUrlPatterns("/galleries/*", "/files/*");
-        registration.setName("AuthFilter");
+        registration.addUrlPatterns("/galleries/*", "/files/*", "/search/*");
+                registration.setName("AuthFilter");
         registration.setOrder(1);
         return registration;
     }
@@ -32,7 +32,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public FilterRegistrationBean pagingFilterRegistration() {
         FilterRegistrationBean<PagingFilter> registration = new FilterRegistrationBean<>();
         registration.setFilter(new PagingFilter());
-        registration.addUrlPatterns("/galleries/", "/files/");
+        registration.addUrlPatterns("/galleries/", "/files/", "/search/*");
         registration.setName("PagingFilter");
         registration.setOrder(2);
         return registration;

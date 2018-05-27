@@ -11,5 +11,6 @@ public class Comment {
     public String created;
 
     public Comment() {
+
     }
 }

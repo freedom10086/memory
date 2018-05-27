@@ -13,7 +13,8 @@ public class Gallery {
     public String cover;
     public User creater;
 
-    List<ImageGroup> images;
+    // 查询Gallery此字段为空 查询详情为所有的
+    public List<ImageGroup> images;
 
     public LocalDateTime created;
     public LocalDateTime updated;

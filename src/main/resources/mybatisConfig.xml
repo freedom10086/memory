@@ -13,6 +13,7 @@
         <typeAlias alias="Comment" type="com.tencent.memory.model.Comment"/>
         <typeAlias alias="Gallery" type="com.tencent.memory.model.Gallery"/>
         <typeAlias alias="Image" type="com.tencent.memory.model.Image"/>
+        <typeAlias alias="ImageGroup" type="com.tencent.memory.model.ImageGroup"/>
     </typeAliases>
 
 </configuration>
