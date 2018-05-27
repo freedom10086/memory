@@ -11,6 +11,8 @@ public class Image {
     @JsonIgnore
     public long groupId;
 
+    public long galleryId;
+
     public String url;
     public User creater;
     public String description;

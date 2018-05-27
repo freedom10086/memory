@@ -32,13 +32,14 @@ public class GalleryServiceImpl implements GalleryService {
         this.imageMapper = imageMapper;
     }
 
-    // 数据库不分页
-    // 代码分页
+    // 数据库分页
+    // 代码分组
     @Override
-    public Gallery loadGallery(long galleryId) {
+    public Gallery loadGallery(long galleryId, Paging paging) {
         Gallery gallery = galleryMapper.findById(galleryId);
         if (gallery != null) {
-            List<Image> images = imageMapper.getAllByGallery(galleryId, Order.DESC.value);
+            List<Image> images = imageMapper.getGroupsByGallery(galleryId, paging.start, paging.size, Order.DESC.value);
+            //List<Image> images = imageMapper.getAllByGallery(galleryId, Order.DESC.value);
             //代码分组
             List<ImageGroup> imageGroups = new ArrayList<>();
             for (Image image : images) {

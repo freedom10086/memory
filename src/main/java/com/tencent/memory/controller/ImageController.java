@@ -4,11 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tencent.memory.config.Attrs;
 import com.tencent.memory.model.*;
 import com.tencent.memory.service.ImageService;
-import com.tencent.memory.util.Token;
+import com.tencent.memory.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
@@ -25,6 +26,27 @@ public class ImageController {
     @Autowired
     public ImageController(ImageService imageService) {
         this.imageService = imageService;
+    }
+
+    // 获取某个相册的分组列表
+    // 应用 相册详情页
+    @GetMapping("/galleries/{galleryId}/image-groups/")
+    public ApiResult<List<ImageGroup>> getImageGroupsFromGallery(ServletRequest req,
+                                                                 @PathVariable("galleryId") long galleryId) {
+        Paging paging = (Paging) req.getAttribute(Attrs.paging);
+        List<ImageGroup> res = imageService.getImageGroupsFromGallery(galleryId, paging);
+        return new ApiResultBuilder<List<ImageGroup>>().success(res).build();
+    }
+
+    // 获取最新的图片组
+    // 应用 最新页面
+    @GetMapping("/galleries/new-image-groups/")
+    public ApiResult<List<ImageGroup>> getNewsImageGroup(ServletRequest req) {
+        Paging paging = (Paging) req.getAttribute(Attrs.paging);
+        Long uid = (Long) req.getAttribute(Attrs.uid);
+
+        List<ImageGroup> res = imageService.getNewsImageGroups(uid, paging);
+        return new ApiResultBuilder<List<ImageGroup>>().success(res).build();
     }
 
     // 查询某张图片

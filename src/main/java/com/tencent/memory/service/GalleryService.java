@@ -9,7 +9,7 @@ import java.util.List;
 public interface GalleryService {
 
     //imageSize 图片数目
-    Gallery loadGallery(long galleryId);
+    Gallery loadGallery(long galleryId, Paging paging);
 
     List<Gallery> loadMyGalleries(long uid, Paging paging, Order order);
 

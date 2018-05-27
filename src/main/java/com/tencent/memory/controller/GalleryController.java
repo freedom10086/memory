@@ -5,6 +5,7 @@ import com.tencent.memory.model.ApiResult;
 import com.tencent.memory.model.ApiResultBuilder;
 import com.tencent.memory.model.Gallery;
 import com.tencent.memory.service.GalleryService;
+import com.tencent.memory.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -56,7 +57,6 @@ public class GalleryController {
             return new ApiResultBuilder<Integer>()
                     .error(HttpStatus.NOT_MODIFIED.value(), "相册不存在:" + galleryId).build();
         }
-
     }
 
     // 接受邀请添加相册
@@ -79,10 +79,12 @@ public class GalleryController {
     }
 
     // 获取指定相册
-    // 不分页全部取出
+    // 同时返回里面的数据的分页
     @GetMapping("/galleries/{galleryId}")
-    public ApiResult<Gallery> getGallery(@PathVariable("galleryId") long galleryId) {
-        Gallery gallery = galleryService.loadGallery(galleryId);
+    public ApiResult<Gallery> getGallery(HttpServletRequest req,
+                                         @PathVariable("galleryId") long galleryId) {
+        Paging paging = (Paging) req.getAttribute(Attrs.paging);
+        Gallery gallery = galleryService.loadGallery(galleryId, paging);
         if (gallery == null) {
             return new ApiResultBuilder<Gallery>()
                     .error(HttpStatus.NOT_MODIFIED.value(), "相册不存在:" + galleryId).build();

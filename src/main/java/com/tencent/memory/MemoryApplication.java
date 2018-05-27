@@ -1,11 +1,11 @@
 package com.tencent.memory;
 
-import com.tencent.memory.service.UploadService;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
 @SpringBootApplication
 @MapperScan(basePackages = "com.tencent.memory.dao")
@@ -16,9 +16,9 @@ public class MemoryApplication {
     }
 
     @Bean
-    CommandLineRunner init(UploadService storageService) {
-        return (args) -> {
-            storageService.init();
-        };
+    StringRedisTemplate redisTemplate(RedisConnectionFactory connectionFactory) {
+
+        return new StringRedisTemplate(connectionFactory);
+
     }
 }

@@ -1,7 +1,6 @@
 package com.tencent.memory.dao;
 
 import com.tencent.memory.model.Comment;
-import com.tencent.memory.model.Image;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
@@ -19,20 +18,21 @@ public interface CommentMapper {
     @Select("SELECT * FROM comment " +
             "inner join user on user.id = comment.creater " +
             "WHERE id = #{id}")
+    @ResultMap("com.tencent.memory.dao.CommentMapper.commentMap")
     Comment findById(@Param("id") int id);
 
 
     // 查询某个图片的所有评论
     @Select("SELECT * FROM comment " +
             "inner join user on user.id = comment.creater " +
-            "where image.galleryId = #{galleryId} " +
-            "limit #{size} offset #{start} order by id #{order}")
-    List<Image> getImageAllByCreated(@Param("galleryId") long galleryId,
+            "where comment.imageId = #{imageId} " +
+            "limit #{size} offset #{start} order by id ${order}")
+    List<Comment> getComments(@Param("imageId") long imageId,
                                      @Param("start") int start, @Param("size") int size,
                                      @Param("order") String order);
 
 
-    @Update("UPDATE comment SET content = #{content}, created = now() WHERE id = #{id}")
+    @Update("UPDATE comment SET content = #{content} WHERE id = #{id}")
     int update(Comment comment);
 
 

@@ -1,6 +1,8 @@
 package com.tencent.memory.service;
 
 import com.tencent.memory.model.Image;
+import com.tencent.memory.model.ImageGroup;
+import com.tencent.memory.util.Paging;
 
 import java.util.List;
 
@@ -8,6 +10,11 @@ public interface ImageService {
 
     Image findById(long imageId);
 
+    boolean isExist(long imageId);
+
+    List<ImageGroup> getImageGroupsFromGallery(long galleryId, Paging paging);
+
+    List<ImageGroup> getNewsImageGroups(long uid, Paging paging);
 
     // 创建group 再把这些图片插入
     int addImagesToGallery(long galleryId, long uid, Image[] images, String description);
