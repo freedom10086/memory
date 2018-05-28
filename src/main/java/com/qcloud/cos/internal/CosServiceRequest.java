@@ -1,12 +1,8 @@
 package com.qcloud.cos.internal;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
 import com.qcloud.cos.event.ProgressListener;
+
+import java.util.*;
 
 public class CosServiceRequest implements Cloneable, ReadLimitInfo  {
     

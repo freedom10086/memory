@@ -1,11 +1,11 @@
 package com.qcloud.cos.exception;
 
+import com.qcloud.cos.model.DeleteObjectsResult.DeletedObject;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import com.qcloud.cos.model.DeleteObjectsResult.DeletedObject;
 
 public class MultiObjectDeleteException extends CosServiceException implements Serializable {
 

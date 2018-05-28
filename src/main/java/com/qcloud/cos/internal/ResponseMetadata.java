@@ -1,8 +1,8 @@
 package com.qcloud.cos.internal;
 
-import java.util.Map;
-
 import com.qcloud.cos.Headers;
+
+import java.util.Map;
 
 public class ResponseMetadata {
     protected final Map<String, String> metadata;

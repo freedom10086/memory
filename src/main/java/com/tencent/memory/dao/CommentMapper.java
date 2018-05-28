@@ -1,6 +1,7 @@
 package com.tencent.memory.dao;
 
 import com.tencent.memory.model.Comment;
+import com.tencent.memory.model.Order;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
@@ -10,32 +11,34 @@ import java.util.List;
 @Component
 public interface CommentMapper {
 
-    @Insert("INSERT INTO comment(galleryId,creater,content) VALUES " +
-            "(#{galleryId},#{creater.id},#{content})")
+    @Insert("INSERT INTO comment(imageId,creater,content) VALUES " +
+            "(#{imageId},#{creater.id},#{content})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    int insert(Comment image);
+    int insert(Comment comment);
 
     @Select("SELECT * FROM comment " +
             "inner join user on user.id = comment.creater " +
-            "WHERE id = #{id}")
+            "WHERE comment.id = #{id}")
     @ResultMap("com.tencent.memory.dao.CommentMapper.commentMap")
-    Comment findById(@Param("id") int id);
+    Comment findById(@Param("id") long id);
 
 
     // 查询某个图片的所有评论
     @Select("SELECT * FROM comment " +
             "inner join user on user.id = comment.creater " +
             "where comment.imageId = #{imageId} " +
-            "limit #{size} offset #{start} order by id ${order}")
+            "order by comment.created ${order} " +
+            "limit #{size} offset #{start}")
+    @ResultMap("com.tencent.memory.dao.CommentMapper.commentMap")
     List<Comment> getComments(@Param("imageId") long imageId,
-                                     @Param("start") int start, @Param("size") int size,
-                                     @Param("order") String order);
+                              @Param("start") int start, @Param("size") int size,
+                              @Param("order") Order order);
 
 
     @Update("UPDATE comment SET content = #{content} WHERE id = #{id}")
     int update(Comment comment);
 
 
-    @Delete("delete from comment where id = #{id}")
-    int delete(@Param("id") int id);
+    @Delete("delete from comment where id = #{id} and creater = #{uid}")
+    int delete(@Param("id") long id, @Param("uid") long uid);
 }

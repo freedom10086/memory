@@ -1,9 +1,9 @@
 package com.qcloud.cos.transfer;
 
-import java.io.IOException;
-
 import com.qcloud.cos.exception.PauseException;
 import com.qcloud.cos.model.ObjectMetadata;
+
+import java.io.IOException;
 
 /**
  * Represents an asynchronous download from Qcloud COS.

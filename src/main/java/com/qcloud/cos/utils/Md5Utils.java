@@ -1,13 +1,9 @@
 package com.qcloud.cos.utils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
+
+import java.io.*;
 
 public class Md5Utils {
     public static byte[] computeMD5Hash(InputStream is) throws IOException {

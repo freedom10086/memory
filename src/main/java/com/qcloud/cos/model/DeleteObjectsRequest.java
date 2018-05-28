@@ -1,10 +1,10 @@
 package com.qcloud.cos.model;
 
+import com.qcloud.cos.internal.CosServiceRequest;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.qcloud.cos.internal.CosServiceRequest;
 
 /**
  * Provides options for deleting multiple objects in a specified bucket. Once deleted, the object(s)

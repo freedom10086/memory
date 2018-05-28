@@ -1,10 +1,10 @@
 package com.qcloud.cos.model;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import com.qcloud.cos.internal.ObjectExpirationResult;
 import com.qcloud.cos.internal.SSEResultBase;
+
+import java.io.Serializable;
+import java.util.Date;
 
 public class CopyObjectResult extends SSEResultBase
         implements ObjectExpirationResult, Serializable {

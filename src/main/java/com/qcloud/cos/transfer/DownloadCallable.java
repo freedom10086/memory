@@ -1,16 +1,5 @@
 package com.qcloud.cos.transfer;
 
-import java.io.File;
-import java.net.SocketException;
-import java.util.Arrays;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CountDownLatch;
-
-import javax.net.ssl.SSLProtocolException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.qcloud.cos.COS;
 import com.qcloud.cos.exception.CosClientException;
 import com.qcloud.cos.exception.FileLockException;
@@ -20,6 +9,15 @@ import com.qcloud.cos.model.GetObjectRequest;
 import com.qcloud.cos.transfer.Transfer.TransferState;
 import com.qcloud.cos.utils.ServiceUtils;
 import com.qcloud.cos.utils.ServiceUtils.RetryableCOSDownloadTask;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.net.ssl.SSLProtocolException;
+import java.io.File;
+import java.net.SocketException;
+import java.util.Arrays;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CountDownLatch;
 
 final class DownloadCallable implements Callable<File> {
     private static final Logger log = LoggerFactory.getLogger(DownloadCallable.class);

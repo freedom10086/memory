@@ -1,10 +1,10 @@
 package com.qcloud.cos.model;
 
+import com.qcloud.cos.internal.CosServiceRequest;
+
 import java.io.File;
 import java.io.InputStream;
 import java.io.Serializable;
-
-import com.qcloud.cos.internal.CosServiceRequest;
 
 public class UploadPartRequest extends CosServiceRequest implements SSECustomerKeyProvider, CosDataSource, Serializable {
     private static final long serialVersionUID = 1L;

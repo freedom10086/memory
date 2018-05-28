@@ -1,8 +1,8 @@
 package com.qcloud.cos.model;
 
-import java.io.Serializable;
-
 import com.qcloud.cos.internal.SSEResultBase;
+
+import java.io.Serializable;
 
 public class InitiateMultipartUploadResult extends SSEResultBase implements Serializable {
     /** The name of the bucket in which the new multipart upload was initiated */

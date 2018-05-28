@@ -1,6 +1,14 @@
 package com.qcloud.cos.transfer;
 
-import static com.qcloud.cos.event.SDKProgressPublisher.publishProgress;
+import com.qcloud.cos.COS;
+import com.qcloud.cos.event.COSProgressPublisher;
+import com.qcloud.cos.event.ProgressEventType;
+import com.qcloud.cos.event.ProgressListenerChain;
+import com.qcloud.cos.internal.UploadPartRequestFactory;
+import com.qcloud.cos.model.*;
+import com.qcloud.cos.transfer.Transfer.TransferState;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -12,30 +20,7 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.qcloud.cos.COS;
-import com.qcloud.cos.event.COSProgressPublisher;
-import com.qcloud.cos.event.ProgressEventType;
-import com.qcloud.cos.event.ProgressListenerChain;
-import com.qcloud.cos.internal.UploadPartRequestFactory;
-import com.qcloud.cos.model.AbortMultipartUploadRequest;
-import com.qcloud.cos.model.COSEncryption;
-import com.qcloud.cos.model.CompleteMultipartUploadRequest;
-import com.qcloud.cos.model.CompleteMultipartUploadResult;
-import com.qcloud.cos.model.EncryptedInitiateMultipartUploadRequest;
-import com.qcloud.cos.model.EncryptedPutObjectRequest;
-import com.qcloud.cos.model.InitiateMultipartUploadRequest;
-import com.qcloud.cos.model.ListPartsRequest;
-import com.qcloud.cos.model.PartETag;
-import com.qcloud.cos.model.PartListing;
-import com.qcloud.cos.model.PartSummary;
-import com.qcloud.cos.model.PutObjectRequest;
-import com.qcloud.cos.model.PutObjectResult;
-import com.qcloud.cos.model.UploadPartRequest;
-import com.qcloud.cos.model.UploadResult;
-import com.qcloud.cos.transfer.Transfer.TransferState;
+import static com.qcloud.cos.event.SDKProgressPublisher.publishProgress;
 
 
 public class UploadCallable implements Callable<UploadResult> {

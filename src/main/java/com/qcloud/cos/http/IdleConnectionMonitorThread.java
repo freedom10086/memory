@@ -1,8 +1,8 @@
 package com.qcloud.cos.http;
 
-import java.util.concurrent.TimeUnit;
-
 import org.apache.http.conn.HttpClientConnectionManager;
+
+import java.util.concurrent.TimeUnit;
 
 //用于监控空闲的连接池连接
 public final class IdleConnectionMonitorThread extends Thread {

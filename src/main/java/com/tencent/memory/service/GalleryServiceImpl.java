@@ -22,7 +22,6 @@ public class GalleryServiceImpl implements GalleryService {
     private final UserGalleryMapper userGalleryMapper;
     private final ImageMapper imageMapper;
 
-
     @Autowired
     public GalleryServiceImpl(GalleryMapper galleryMapper,
                               UserGalleryMapper userGalleryMapper,
@@ -30,6 +29,18 @@ public class GalleryServiceImpl implements GalleryService {
         this.galleryMapper = galleryMapper;
         this.userGalleryMapper = userGalleryMapper;
         this.imageMapper = imageMapper;
+    }
+
+    // 创建相册
+    // 1.插入 user_gallery
+    @Override
+    public int createGallery(Gallery gallery) {
+        int i = galleryMapper.insert(gallery);
+        if (i > 0) {
+            // 把创建者插入到user_gallery
+            userGalleryMapper.addGallery(gallery.creater.id, gallery.id);
+        }
+        return i;
     }
 
     // 数据库分页
@@ -52,7 +63,7 @@ public class GalleryServiceImpl implements GalleryService {
                     imageGroups.add(g);
                 }
             }
-            gallery.images = imageGroups;
+            gallery.groups = imageGroups;
         }
 
         return gallery;
@@ -68,11 +79,6 @@ public class GalleryServiceImpl implements GalleryService {
     @Override
     public List<Gallery> searchMyGalleries(long uid, String query, Paging paging, Order order) {
         return galleryMapper.searchByName(uid, query, paging.start, paging.size, order.value);
-    }
-
-    @Override
-    public int createGallery(Gallery gallery) {
-        return galleryMapper.insert(gallery);
     }
 
     @Override

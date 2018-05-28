@@ -1,12 +1,12 @@
 package com.qcloud.cos.model;
 
+import com.qcloud.cos.internal.CosServiceRequest;
+import com.qcloud.cos.region.Region;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import com.qcloud.cos.internal.CosServiceRequest;
-import com.qcloud.cos.region.Region;
 
 public class CopyObjectRequest extends CosServiceRequest
         implements SSECOSKeyManagementParamsProvider, Serializable {

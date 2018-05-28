@@ -6,6 +6,10 @@
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="cover" jdbcType="VARCHAR" property="cover"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="images" jdbcType="INTEGER" property="images"/>
+        <result column="users" jdbcType="INTEGER" property="users"/>
         <result column="created" jdbcType="TIMESTAMP" property="created"/>
         <result column="updated" jdbcType="TIMESTAMP" property="updated"/>
         <association property="creater" resultMap="userMap"/>

@@ -1,20 +1,5 @@
 package com.qcloud.cos.internal;
 
-import static com.qcloud.cos.utils.StringUtils.UTF8;
-
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Map;
-
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamConstants;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.qcloud.cos.Headers;
 import com.qcloud.cos.exception.CosServiceException;
 import com.qcloud.cos.exception.CosServiceExceptionBuilder;
@@ -22,6 +7,19 @@ import com.qcloud.cos.http.CosHttpResponse;
 import com.qcloud.cos.http.HttpMethodName;
 import com.qcloud.cos.http.HttpResponseHandler;
 import com.qcloud.cos.utils.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamConstants;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Map;
+
+import static com.qcloud.cos.utils.StringUtils.UTF8;
 
 public class CosErrorResponseHandler implements HttpResponseHandler<CosServiceException> {
 

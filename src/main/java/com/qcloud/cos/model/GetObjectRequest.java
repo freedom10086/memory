@@ -1,11 +1,11 @@
 package com.qcloud.cos.model;
 
+import com.qcloud.cos.internal.CosServiceRequest;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import com.qcloud.cos.internal.CosServiceRequest;
 
 public class GetObjectRequest extends CosServiceRequest
         implements SSECustomerKeyProvider, Serializable {

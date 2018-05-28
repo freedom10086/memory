@@ -1,10 +1,10 @@
 package com.qcloud.cos.event;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import com.qcloud.cos.internal.CosServiceRequest;
 import com.qcloud.cos.internal.SdkFilterInputStream;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 
 public class ProgressInputStream extends SdkFilterInputStream {

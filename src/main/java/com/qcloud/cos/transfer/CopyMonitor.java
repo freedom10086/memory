@@ -1,15 +1,5 @@
 package com.qcloud.cos.transfer;
 
-import static com.qcloud.cos.event.SDKProgressPublisher.publishProgress;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CancellationException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicReference;
-
 import com.qcloud.cos.COS;
 import com.qcloud.cos.event.ProgressEventType;
 import com.qcloud.cos.event.ProgressListenerChain;
@@ -19,6 +9,16 @@ import com.qcloud.cos.model.CopyObjectRequest;
 import com.qcloud.cos.model.CopyResult;
 import com.qcloud.cos.model.PartETag;
 import com.qcloud.cos.transfer.Transfer.TransferState;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicReference;
+
+import static com.qcloud.cos.event.SDKProgressPublisher.publishProgress;
 
 public class CopyMonitor implements Callable<CopyResult>, TransferMonitor {
     /**

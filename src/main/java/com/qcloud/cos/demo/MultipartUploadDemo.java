@@ -1,30 +1,17 @@
 package com.qcloud.cos.demo;
 
-import java.io.ByteArrayInputStream;
-import java.util.LinkedList;
-import java.util.List;
-
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.auth.BasicCOSCredentials;
 import com.qcloud.cos.auth.COSCredentials;
 import com.qcloud.cos.exception.CosClientException;
 import com.qcloud.cos.exception.CosServiceException;
-import com.qcloud.cos.model.AbortMultipartUploadRequest;
-import com.qcloud.cos.model.CompleteMultipartUploadRequest;
-import com.qcloud.cos.model.CompleteMultipartUploadResult;
-import com.qcloud.cos.model.CopyPartRequest;
-import com.qcloud.cos.model.CopyPartResult;
-import com.qcloud.cos.model.InitiateMultipartUploadRequest;
-import com.qcloud.cos.model.InitiateMultipartUploadResult;
-import com.qcloud.cos.model.ListPartsRequest;
-import com.qcloud.cos.model.PartETag;
-import com.qcloud.cos.model.PartListing;
-import com.qcloud.cos.model.PartSummary;
-import com.qcloud.cos.model.StorageClass;
-import com.qcloud.cos.model.UploadPartRequest;
-import com.qcloud.cos.model.UploadPartResult;
+import com.qcloud.cos.model.*;
 import com.qcloud.cos.region.Region;
+
+import java.io.ByteArrayInputStream;
+import java.util.LinkedList;
+import java.util.List;
 
 
 /**

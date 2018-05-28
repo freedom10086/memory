@@ -1,9 +1,8 @@
 package com.qcloud.cos.model;
 
-import java.io.Serializable;
-
 import java.io.File;
 import java.io.InputStream;
+import java.io.Serializable;
 
 /**
  * <p>

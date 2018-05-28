@@ -1,9 +1,9 @@
 package com.qcloud.cos.internal;
 
+import com.qcloud.cos.exception.CosClientException;
+
 import java.io.IOException;
 import java.io.InputStream;
-
-import com.qcloud.cos.exception.CosClientException;
 
 public class LengthCheckInputStream extends SdkFilterInputStream {
     public static final boolean INCLUDE_SKIPPED_BYTES = true;

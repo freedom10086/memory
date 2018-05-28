@@ -1,15 +1,10 @@
 package com.qcloud.cos.utils;
 
-import java.io.ByteArrayOutputStream;
-import java.io.Closeable;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
+import com.qcloud.cos.internal.Releasable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.qcloud.cos.internal.Releasable;
+import java.io.*;
 
 
 /**

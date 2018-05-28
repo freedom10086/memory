@@ -7,11 +7,10 @@
 package com.tencent.memory.util;
 
 
-import java.util.Base64;
-import java.util.Random;
-
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import java.util.Base64;
+import java.util.Random;
 
 public class Sign {
 

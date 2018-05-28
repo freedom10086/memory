@@ -1,13 +1,5 @@
 package com.qcloud.cos.demo;
 
-import java.io.IOException;
-
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.ProtocolException;
-import java.net.URL;
-import java.util.Date;
-
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.auth.AnonymousCOSCredentials;
@@ -18,6 +10,13 @@ import com.qcloud.cos.model.GeneratePresignedUrlRequest;
 import com.qcloud.cos.model.ResponseHeaderOverrides;
 import com.qcloud.cos.region.Region;
 import com.qcloud.cos.utils.DateUtils;
+
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.ProtocolException;
+import java.net.URL;
+import java.util.Date;
 
 /**
  * GeneratePresignedUrlDemo展示了生成预签名的下载链接与上传连接的使用示例.

@@ -1,16 +1,16 @@
 package com.qcloud.cos.transfer;
 
-import static com.qcloud.cos.utils.StringUtils.UTF8;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.qcloud.cos.utils.Jackson;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.qcloud.cos.utils.Jackson;
+import static com.qcloud.cos.utils.StringUtils.UTF8;
 
 /**
  * Abstract base class for the information of a pausible upload or download; such

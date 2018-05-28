@@ -1,9 +1,9 @@
 package com.qcloud.cos.event;
 
+import java.io.InputStream;
+
 import static com.qcloud.cos.event.SDKProgressPublisher.publishResponseBytesTransferred;
 import static com.qcloud.cos.event.SDKProgressPublisher.publishResponseReset;
-
-import java.io.InputStream;
 
 /**
  * Used for response input stream progress tracking purposes.

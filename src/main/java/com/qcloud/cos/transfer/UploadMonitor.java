@@ -1,6 +1,13 @@
 package com.qcloud.cos.transfer;
 
-import static com.qcloud.cos.event.SDKProgressPublisher.publishProgress;
+import com.qcloud.cos.COS;
+import com.qcloud.cos.event.ProgressEventType;
+import com.qcloud.cos.event.ProgressListenerChain;
+import com.qcloud.cos.exception.CosClientException;
+import com.qcloud.cos.model.PartETag;
+import com.qcloud.cos.model.PutObjectRequest;
+import com.qcloud.cos.model.UploadResult;
+import com.qcloud.cos.transfer.Transfer.TransferState;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,14 +17,7 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
-import com.qcloud.cos.COS;
-import com.qcloud.cos.event.ProgressEventType;
-import com.qcloud.cos.event.ProgressListenerChain;
-import com.qcloud.cos.exception.CosClientException;
-import com.qcloud.cos.model.PartETag;
-import com.qcloud.cos.model.PutObjectRequest;
-import com.qcloud.cos.model.UploadResult;
-import com.qcloud.cos.transfer.Transfer.TransferState;
+import static com.qcloud.cos.event.SDKProgressPublisher.publishProgress;
 
 /**
  * Manages an upload by periodically checking to see if the upload is done, and returning a result

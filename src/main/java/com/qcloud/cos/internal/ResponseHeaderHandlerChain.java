@@ -1,10 +1,10 @@
 package com.qcloud.cos.internal;
 
+import com.qcloud.cos.http.CosHttpResponse;
+
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
-
-import com.qcloud.cos.http.CosHttpResponse;
 
 /**
  * An XML response handler that can also process an arbitrary number of headers

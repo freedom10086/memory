@@ -1,8 +1,5 @@
 package com.qcloud.cos.transfer;
 
-import java.io.File;
-import java.io.IOException;
-
 import com.qcloud.cos.event.COSProgressPublisher;
 import com.qcloud.cos.event.ProgressEventType;
 import com.qcloud.cos.event.ProgressListenerChain;
@@ -11,7 +8,9 @@ import com.qcloud.cos.exception.PauseException;
 import com.qcloud.cos.model.COSObject;
 import com.qcloud.cos.model.GetObjectRequest;
 import com.qcloud.cos.model.ObjectMetadata;
-import com.qcloud.cos.transfer.TransferManagerUtils;
+
+import java.io.File;
+import java.io.IOException;
 
 public class DownloadImpl extends AbstractTransfer implements Download {
     private COSObject cosObject;

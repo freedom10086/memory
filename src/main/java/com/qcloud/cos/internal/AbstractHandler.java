@@ -1,9 +1,9 @@
 package com.qcloud.cos.internal;
 
-import java.util.LinkedList;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
+
+import java.util.LinkedList;
 
 /**
  * Package private abstract base for all handlers here; adds tracking of the

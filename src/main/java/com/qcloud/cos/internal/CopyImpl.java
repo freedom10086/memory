@@ -1,8 +1,5 @@
 package com.qcloud.cos.internal;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-
 import com.qcloud.cos.event.ProgressListenerChain;
 import com.qcloud.cos.event.TransferStateChangeListener;
 import com.qcloud.cos.exception.CosClientException;
@@ -11,6 +8,9 @@ import com.qcloud.cos.model.CopyResult;
 import com.qcloud.cos.transfer.AbstractTransfer;
 import com.qcloud.cos.transfer.Copy;
 import com.qcloud.cos.transfer.TransferProgress;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 /**
  * An implementation of the Copy Interface that helps in retrieving the result

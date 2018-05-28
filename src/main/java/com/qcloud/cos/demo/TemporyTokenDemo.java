@@ -1,7 +1,5 @@
 package com.qcloud.cos.demo;
 
-import java.io.File;
-
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.auth.BasicSessionCredentials;
@@ -10,6 +8,8 @@ import com.qcloud.cos.model.ObjectMetadata;
 import com.qcloud.cos.model.PutObjectRequest;
 import com.qcloud.cos.model.PutObjectResult;
 import com.qcloud.cos.region.Region;
+
+import java.io.File;
 
 public class TemporyTokenDemo {
 	// 该例子介绍使用临时秘钥来访问COS上的资源

@@ -2,46 +2,59 @@ package com.tencent.memory.dao;
 
 import com.tencent.memory.model.Image;
 import com.tencent.memory.model.MyException;
-import com.tencent.memory.model.User;
+import com.tencent.memory.util.TextUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.RowMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.List;
 
 
 @Repository
 public class ImageDao extends JdbcDaoSupport {
+
+    private static final Logger logger = LoggerFactory.getLogger(ImageDao.class);
 
     @Autowired
     public ImageDao(DataSource dataSource) {
         setDataSource(dataSource);
     }
 
+    // 新发布一条动态
+    // 可以上传多张图片
+    // 1. create_group
+    // 2. insert image
+    // 3. update_cover 更新封面
     public int addImagesToGallery(long galleryId, long uid, String description, Image[] images) {
+        logger.info("add images galleryId:{}, uid:{},images:{}", galleryId, uid, images.length);
         Connection connection = getConnection();
 
-        String sql = "insert into image_group(galleryId,description) values(?,?)";
+        String sql = "insert into image_group(galleryId,creater,description) values(?,?,?)";
         String sql2 = "insert into image(galleryId,groupId,description,url,creater) values(?,?,?,?,?)";
+        String sql3 = "update gallery set cover = ? where id = ?";
 
         PreparedStatement pst = null;
         ResultSet rs = null;
-        int groupId = -1;
+        long groupId = -1;
 
         try {
             pst = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pst.setLong(1, galleryId);
-            pst.setString(2, description);
+            pst.setLong(2, uid);
+            pst.setString(3, description);
             pst.executeUpdate();
             rs = pst.getGeneratedKeys();
 
-            groupId = 0;
             if (rs.next()) {
-                groupId = rs.getInt(1);
-                System.out.println("new groupId:" + groupId);
+                groupId = rs.getLong(1);
+                logger.info("first step create group {}", groupId);
+            } else {
+                logger.error("group id not return");
+                throw new MyException(HttpStatus.INTERNAL_SERVER_ERROR, "创建图片组失败");
             }
 
 
@@ -49,7 +62,7 @@ public class ImageDao extends JdbcDaoSupport {
             for (Image image : images) {
                 pst.setLong(1, galleryId);
                 pst.setLong(2, groupId);
-                pst.setString(3, image.description);
+                pst.setString(3, TextUtils.isEmpty(image.description) ? "" : image.description);
                 pst.setString(4, image.url);
                 pst.setLong(5, uid);
                 pst.addBatch();
@@ -60,6 +73,15 @@ public class ImageDao extends JdbcDaoSupport {
             for (int i : ss) {
                 count += i;
             }
+
+            logger.info("second step insert image {}", count);
+
+            pst = connection.prepareStatement(sql3);
+            pst.setString(1, images[0].url);
+            pst.setLong(2, galleryId);
+            int u = pst.executeUpdate();
+
+            logger.info("last step update cover {}", u);
             return count;
 
 
@@ -69,7 +91,7 @@ public class ImageDao extends JdbcDaoSupport {
             try {
                 connection.close();
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.error("error close connection {}", e.getMessage());
             }
         }
     }

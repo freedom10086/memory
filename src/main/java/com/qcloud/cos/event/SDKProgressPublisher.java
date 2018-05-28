@@ -1,19 +1,10 @@
 package com.qcloud.cos.event;
 
-import static com.qcloud.cos.event.ProgressEventType.HTTP_REQUEST_CONTENT_RESET_EVENT;
-import static com.qcloud.cos.event.ProgressEventType.HTTP_RESPONSE_CONTENT_RESET_EVENT;
-import static com.qcloud.cos.event.ProgressEventType.REQUEST_BYTE_TRANSFER_EVENT;
-import static com.qcloud.cos.event.ProgressEventType.REQUEST_CONTENT_LENGTH_EVENT;
-import static com.qcloud.cos.event.ProgressEventType.RESPONSE_BYTE_TRANSFER_EVENT;
-import static com.qcloud.cos.event.ProgressEventType.RESPONSE_CONTENT_LENGTH_EVENT;
-
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.ThreadFactory;
-
 import org.apache.commons.logging.LogFactory;
+
+import java.util.concurrent.*;
+
+import static com.qcloud.cos.event.ProgressEventType.*;
 
 /**
  * This class is responsible for executing the callback method of

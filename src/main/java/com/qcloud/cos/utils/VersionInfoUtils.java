@@ -1,10 +1,10 @@
 package com.qcloud.cos.utils;
 
-import java.io.InputStream;
-import java.util.Properties;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.InputStream;
+import java.util.Properties;
 
 public class VersionInfoUtils {
     /** The COS SDK version info file with SDK versioning info */

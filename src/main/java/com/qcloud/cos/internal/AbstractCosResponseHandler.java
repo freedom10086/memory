@@ -1,21 +1,19 @@
 package com.qcloud.cos.internal;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.qcloud.cos.Headers;
 import com.qcloud.cos.http.CosHttpResponse;
 import com.qcloud.cos.http.HttpResponseHandler;
 import com.qcloud.cos.model.ObjectMetadata;
 import com.qcloud.cos.utils.DateUtils;
 import com.qcloud.cos.utils.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 public abstract class AbstractCosResponseHandler<T>
         implements HttpResponseHandler<CosServiceResponse<T>> {

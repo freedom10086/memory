@@ -1,10 +1,9 @@
 package com.qcloud.cos.event;
 
-import java.util.concurrent.Future;
-
+import com.qcloud.cos.transfer.PersistableTransfer;
 import org.slf4j.LoggerFactory;
 
-import com.qcloud.cos.transfer.PersistableTransfer;
+import java.util.concurrent.Future;
 
 /**
  * Used to publish transfer events.

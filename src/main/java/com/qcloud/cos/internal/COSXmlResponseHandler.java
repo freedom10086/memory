@@ -1,12 +1,11 @@
 package com.qcloud.cos.internal;
 
-import java.io.InputStream;
-import java.util.Map;
-
+import com.qcloud.cos.http.CosHttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.qcloud.cos.http.CosHttpResponse;
+import java.io.InputStream;
+import java.util.Map;
 
 public class COSXmlResponseHandler<T> extends AbstractCosResponseHandler<T> {
 

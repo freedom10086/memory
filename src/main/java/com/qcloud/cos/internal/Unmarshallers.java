@@ -1,21 +1,11 @@
 package com.qcloud.cos.internal;
 
-import java.io.InputStream;
-import java.util.List;
-
 import com.qcloud.cos.internal.XmlResponsesSaxParser.CompleteMultipartUploadHandler;
 import com.qcloud.cos.internal.XmlResponsesSaxParser.CopyObjectResultHandler;
-import com.qcloud.cos.model.AccessControlList;
-import com.qcloud.cos.model.Bucket;
-import com.qcloud.cos.model.BucketCrossOriginConfiguration;
-import com.qcloud.cos.model.BucketLifecycleConfiguration;
-import com.qcloud.cos.model.BucketReplicationConfiguration;
-import com.qcloud.cos.model.BucketVersioningConfiguration;
-import com.qcloud.cos.model.InitiateMultipartUploadResult;
-import com.qcloud.cos.model.MultipartUploadListing;
-import com.qcloud.cos.model.ObjectListing;
-import com.qcloud.cos.model.PartListing;
-import com.qcloud.cos.model.VersionListing;
+import com.qcloud.cos.model.*;
+
+import java.io.InputStream;
+import java.util.List;
 
 
 /*** Collection of unmarshallers for COS XML responses. */

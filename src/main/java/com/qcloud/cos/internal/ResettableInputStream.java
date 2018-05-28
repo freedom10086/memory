@@ -1,14 +1,13 @@
 package com.qcloud.cos.internal;
 
+import com.qcloud.cos.exception.CosClientException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.qcloud.cos.exception.CosClientException;
 
 /**
  * A mark-and-resettable input stream that can be used on files or file input streams.

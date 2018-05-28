@@ -1,9 +1,9 @@
 package com.qcloud.cos.internal;
 
-import static com.qcloud.cos.utils.StringUtils.UTF8;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.qcloud.cos.utils.StringUtils.UTF8;
 
 /**
  * Basic XML Writer helper library. It does not do full XML Well-Formedness

@@ -1,11 +1,11 @@
 package com.qcloud.cos.model;
 
-import static com.qcloud.cos.utils.IOUtils.release;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.InputStream;
 
-import org.slf4j.Logger;
+import static com.qcloud.cos.utils.IOUtils.release;
 
 
 /**

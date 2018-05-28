@@ -1,30 +1,19 @@
 package com.qcloud.cos.demo;
 
-import java.io.File;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.auth.BasicCOSCredentials;
 import com.qcloud.cos.auth.COSCredentials;
 import com.qcloud.cos.exception.CosClientException;
 import com.qcloud.cos.exception.CosServiceException;
-import com.qcloud.cos.model.CopyObjectRequest;
-import com.qcloud.cos.model.CopyResult;
-import com.qcloud.cos.model.GetObjectRequest;
-import com.qcloud.cos.model.PutObjectRequest;
-import com.qcloud.cos.model.UploadResult;
+import com.qcloud.cos.model.*;
 import com.qcloud.cos.region.Region;
-import com.qcloud.cos.transfer.Copy;
-import com.qcloud.cos.transfer.Download;
-import com.qcloud.cos.transfer.PersistableDownload;
-import com.qcloud.cos.transfer.PersistableUpload;
-import com.qcloud.cos.transfer.Transfer;
-import com.qcloud.cos.transfer.TransferManager;
-import com.qcloud.cos.transfer.TransferProgress;
-import com.qcloud.cos.transfer.Upload;
+import com.qcloud.cos.transfer.*;
 import com.qcloud.cos.transfer.Transfer.TransferState;
+
+import java.io.File;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 // TransferManager提供异步的上传文件, 下载文件，copy文件的高级API接口
 // 可以根据文件大小自动的选择上传接口或者copy接口,方便用户使用, 无需自行封装较复杂的分块上传或者分块copy

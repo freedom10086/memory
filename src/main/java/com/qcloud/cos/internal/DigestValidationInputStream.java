@@ -1,11 +1,11 @@
 package com.qcloud.cos.internal;
 
+import com.qcloud.cos.exception.CosClientException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.MessageDigest;
 import java.util.Arrays;
-
-import com.qcloud.cos.exception.CosClientException;
 
 /**
  * Input stream extends SdkDigestInputStream, when you finish reading the stream, it

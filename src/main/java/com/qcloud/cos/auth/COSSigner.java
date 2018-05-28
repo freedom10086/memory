@@ -1,29 +1,19 @@
 package com.qcloud.cos.auth;
 
-import static com.qcloud.cos.auth.COSSignerConstants.LINE_SEPARATOR;
-import static com.qcloud.cos.auth.COSSignerConstants.Q_AK;
-import static com.qcloud.cos.auth.COSSignerConstants.Q_HEADER_LIST;
-import static com.qcloud.cos.auth.COSSignerConstants.Q_KEY_TIME;
-import static com.qcloud.cos.auth.COSSignerConstants.Q_SIGNATURE;
-import static com.qcloud.cos.auth.COSSignerConstants.Q_SIGN_ALGORITHM_KEY;
-import static com.qcloud.cos.auth.COSSignerConstants.Q_SIGN_ALGORITHM_VALUE;
-import static com.qcloud.cos.auth.COSSignerConstants.Q_SIGN_TIME;
-import static com.qcloud.cos.auth.COSSignerConstants.Q_URL_PARAM_LIST;
-import static com.qcloud.cos.auth.COSSignerConstants.SIGN_EXPIRED_TIME;
+import com.qcloud.cos.Headers;
+import com.qcloud.cos.http.CosHttpRequest;
+import com.qcloud.cos.http.HttpMethodName;
+import com.qcloud.cos.internal.CosServiceRequest;
+import com.qcloud.cos.utils.UrlEncoderUtils;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.codec.digest.HmacUtils;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.codec.digest.HmacUtils;
-
-import com.qcloud.cos.Headers;
-import com.qcloud.cos.http.CosHttpRequest;
-import com.qcloud.cos.http.HttpMethodName;
-import com.qcloud.cos.internal.CosServiceRequest;
-import com.qcloud.cos.utils.UrlEncoderUtils;
+import static com.qcloud.cos.auth.COSSignerConstants.*;
 
 public class COSSigner {
 

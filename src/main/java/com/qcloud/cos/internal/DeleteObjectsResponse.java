@@ -1,10 +1,10 @@
 package com.qcloud.cos.internal;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.qcloud.cos.exception.MultiObjectDeleteException.DeleteError;
 import com.qcloud.cos.model.DeleteObjectsResult.DeletedObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class DeleteObjectsResponse {

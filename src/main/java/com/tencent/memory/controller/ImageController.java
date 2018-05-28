@@ -2,9 +2,14 @@ package com.tencent.memory.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tencent.memory.config.Attrs;
-import com.tencent.memory.model.*;
+import com.tencent.memory.config.Config;
+import com.tencent.memory.model.ApiResult;
+import com.tencent.memory.model.ApiResultBuilder;
+import com.tencent.memory.model.Image;
+import com.tencent.memory.model.ImageGroup;
 import com.tencent.memory.service.ImageService;
 import com.tencent.memory.util.Paging;
+import com.tencent.memory.util.TextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -69,18 +74,32 @@ public class ImageController {
                                                 @RequestParam("galleryId") long galleryId,
                                                 @RequestParam("images") String images,
                                                 @RequestParam("description") String description) {
+
         Long uid = (Long) req.getAttribute(Attrs.uid);
-        Image[] imageList;
+        Image[] imageArray;
         try {
-            imageList = new ObjectMapper().readValue(images, Image[].class);
+            imageArray = new ObjectMapper().readValue(images, Image[].class);
         } catch (IOException e) {
-            throw new MyException(HttpStatus.BAD_REQUEST, "images解析错误");
+            //e.printStackTrace();
+            return new ApiResultBuilder<Integer>()
+                    .error(HttpStatus.BAD_REQUEST.value(), "images解析错误:"+e.getMessage()).build();
         }
 
-        if (imageList.length == 0) {
-            throw new MyException(HttpStatus.BAD_REQUEST, "需要上传的图片不能为空");
+        if (imageArray.length == 0) {
+            return new ApiResultBuilder<Integer>()
+                    .error(HttpStatus.BAD_REQUEST.value(), "需要上传的图片不能为空").build();
         }
-        int affets = imageService.addImagesToGallery(galleryId, uid, imageList, description);
+
+        for (Image image : imageArray) {
+            if (TextUtils.isEmpty(image.url) || !image.url.startsWith(Config.bucketPathCdnPrefix)) {
+                return new ApiResultBuilder<Integer>()
+                        .error(HttpStatus.BAD_REQUEST.value(), "图片地址不合法：" + image.url).build();
+            }
+
+            image.url = image.url.substring(Config.bucketPathCdnPrefix.length());
+        }
+
+        int affets = imageService.addImagesToGallery(galleryId, uid, imageArray, description);
 
         return new ApiResultBuilder<Integer>().success(affets).build();
     }

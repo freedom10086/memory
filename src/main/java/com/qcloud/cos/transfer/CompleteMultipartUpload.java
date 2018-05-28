@@ -1,21 +1,17 @@
 package com.qcloud.cos.transfer;
 
-import static com.qcloud.cos.event.SDKProgressPublisher.publishProgress;
+import com.qcloud.cos.COS;
+import com.qcloud.cos.event.ProgressEventType;
+import com.qcloud.cos.event.ProgressListenerChain;
+import com.qcloud.cos.exception.CosClientException;
+import com.qcloud.cos.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
-import com.qcloud.cos.COS;
-import com.qcloud.cos.event.ProgressEventType;
-import com.qcloud.cos.event.ProgressListenerChain;
-import com.qcloud.cos.exception.CosClientException;
-import com.qcloud.cos.model.CompleteMultipartUploadRequest;
-import com.qcloud.cos.model.CompleteMultipartUploadResult;
-import com.qcloud.cos.model.PartETag;
-import com.qcloud.cos.model.PutObjectRequest;
-import com.qcloud.cos.model.UploadResult;
+import static com.qcloud.cos.event.SDKProgressPublisher.publishProgress;
 
 /**
  * Initiates a complete multi-part upload request for a

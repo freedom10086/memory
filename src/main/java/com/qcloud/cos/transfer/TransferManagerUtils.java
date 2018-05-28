@@ -1,15 +1,15 @@
 package com.qcloud.cos.transfer;
 
-import static com.qcloud.cos.internal.Constants.MAXIMUM_UPLOAD_PARTS;
+import com.qcloud.cos.model.CopyObjectRequest;
+import com.qcloud.cos.model.PutObjectRequest;
+import com.qcloud.cos.transfer.Transfer.TransferState;
 
 import java.io.File;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 
-import com.qcloud.cos.model.CopyObjectRequest;
-import com.qcloud.cos.model.PutObjectRequest;
-import com.qcloud.cos.transfer.Transfer.TransferState;
+import static com.qcloud.cos.internal.Constants.MAXIMUM_UPLOAD_PARTS;
 
 
 /**

@@ -1,57 +1,28 @@
 package com.qcloud.cos.transfer;
 
-import static com.qcloud.cos.utils.ServiceUtils.APPEND_MODE;
-import static com.qcloud.cos.utils.ServiceUtils.OVERWRITE_MODE;
-
-import java.io.File;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.qcloud.cos.COS;
 import com.qcloud.cos.COSClient;
-import com.qcloud.cos.event.COSProgressListener;
-import com.qcloud.cos.event.COSProgressListenerChain;
-import com.qcloud.cos.event.MultipleFileTransferProgressUpdatingListener;
-import com.qcloud.cos.event.MultipleFileTransferStateChangeListener;
-import com.qcloud.cos.event.ProgressListener;
-import com.qcloud.cos.event.ProgressListenerChain;
-import com.qcloud.cos.event.TransferCompletionFilter;
-import com.qcloud.cos.event.TransferProgressUpdatingListener;
-import com.qcloud.cos.event.TransferStateChangeListener;
+import com.qcloud.cos.event.*;
 import com.qcloud.cos.exception.CosClientException;
 import com.qcloud.cos.exception.CosServiceException;
 import com.qcloud.cos.exception.FileLockException;
 import com.qcloud.cos.internal.CopyImpl;
 import com.qcloud.cos.internal.CosServiceRequest;
 import com.qcloud.cos.internal.FileLocks;
-import com.qcloud.cos.model.AbortMultipartUploadRequest;
-import com.qcloud.cos.model.COSObjectSummary;
-import com.qcloud.cos.model.CopyObjectRequest;
-import com.qcloud.cos.model.GetObjectMetadataRequest;
-import com.qcloud.cos.model.GetObjectRequest;
-import com.qcloud.cos.model.ListMultipartUploadsRequest;
-import com.qcloud.cos.model.ListObjectsRequest;
-import com.qcloud.cos.model.MultipartUpload;
-import com.qcloud.cos.model.MultipartUploadListing;
-import com.qcloud.cos.model.ObjectListing;
-import com.qcloud.cos.model.ObjectMetadata;
-import com.qcloud.cos.model.PutObjectRequest;
+import com.qcloud.cos.model.*;
 import com.qcloud.cos.transfer.Transfer.TransferState;
 import com.qcloud.cos.utils.VersionInfoUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.InputStream;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static com.qcloud.cos.utils.ServiceUtils.APPEND_MODE;
+import static com.qcloud.cos.utils.ServiceUtils.OVERWRITE_MODE;
 
 /**
  * High level utility for managing transfers to Qcloud COS.

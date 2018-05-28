@@ -1,11 +1,11 @@
 package com.qcloud.cos.model;
 
+import com.qcloud.cos.http.HttpMethodName;
+import com.qcloud.cos.internal.CosServiceRequest;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.qcloud.cos.http.HttpMethodName;
-import com.qcloud.cos.internal.CosServiceRequest;
 
 public class GeneratePresignedUrlRequest extends CosServiceRequest {
     /** The HTTP method (GET, PUT, DELETE, HEAD) to be used in this request and when the pre-signed URL is used */

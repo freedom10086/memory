@@ -1,14 +1,13 @@
 package com.qcloud.cos.model;
 
-import java.io.IOException;
-import java.io.InputStream;
-
+import com.qcloud.cos.internal.SdkFilterInputStream;
+import com.qcloud.cos.utils.IOUtils;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.conn.EofSensorInputStream;
 
-import com.qcloud.cos.internal.SdkFilterInputStream;
-import com.qcloud.cos.utils.IOUtils;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Input stream representing the content of an {@link COSObject}. In addition to

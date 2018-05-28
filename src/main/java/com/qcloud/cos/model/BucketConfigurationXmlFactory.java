@@ -1,8 +1,5 @@
 package com.qcloud.cos.model;
 
-import java.util.List;
-import java.util.Map;
-
 import com.qcloud.cos.exception.CosClientException;
 import com.qcloud.cos.internal.XmlWriter;
 import com.qcloud.cos.model.BucketLifecycleConfiguration.NoncurrentVersionTransition;
@@ -11,12 +8,11 @@ import com.qcloud.cos.model.BucketLifecycleConfiguration.Transition;
 import com.qcloud.cos.model.CORSRule.AllowedMethods;
 import com.qcloud.cos.model.Tag.LifecycleTagPredicate;
 import com.qcloud.cos.model.Tag.Tag;
-import com.qcloud.cos.model.lifecycle.LifecycleAndOperator;
-import com.qcloud.cos.model.lifecycle.LifecycleFilter;
-import com.qcloud.cos.model.lifecycle.LifecycleFilterPredicate;
-import com.qcloud.cos.model.lifecycle.LifecyclePredicateVisitor;
-import com.qcloud.cos.model.lifecycle.LifecyclePrefixPredicate;
+import com.qcloud.cos.model.lifecycle.*;
 import com.qcloud.cos.utils.DateUtils;
+
+import java.util.List;
+import java.util.Map;
 
 
 /**

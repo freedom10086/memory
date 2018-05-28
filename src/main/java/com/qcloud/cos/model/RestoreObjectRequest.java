@@ -1,8 +1,8 @@
 package com.qcloud.cos.model;
 
-import java.io.Serializable;
-
 import com.qcloud.cos.internal.CosServiceRequest;
+
+import java.io.Serializable;
 
 public class RestoreObjectRequest extends CosServiceRequest implements Serializable {
     private static final long serialVersionUID = 1L;

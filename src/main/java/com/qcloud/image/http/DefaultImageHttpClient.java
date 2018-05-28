@@ -5,16 +5,8 @@ import com.qcloud.image.exception.AbstractImageException;
 import com.qcloud.image.exception.ParamException;
 import com.qcloud.image.exception.ServerException;
 import com.qcloud.image.exception.UnknownException;
-import com.squareup.okhttp.Headers;
-import com.squareup.okhttp.HttpUrl;
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.MultipartBuilder;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
+import com.squareup.okhttp.*;
 import com.squareup.okhttp.Request.Builder;
-import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.Response;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 

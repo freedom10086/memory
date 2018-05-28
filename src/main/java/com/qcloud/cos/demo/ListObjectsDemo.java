@@ -1,7 +1,5 @@
 package com.qcloud.cos.demo;
 
-import java.util.List;
-
 import com.qcloud.cos.COSClient;
 import com.qcloud.cos.ClientConfig;
 import com.qcloud.cos.auth.BasicCOSCredentials;
@@ -12,6 +10,8 @@ import com.qcloud.cos.model.COSObjectSummary;
 import com.qcloud.cos.model.ListObjectsRequest;
 import com.qcloud.cos.model.ObjectListing;
 import com.qcloud.cos.region.Region;
+
+import java.util.List;
 
 /**
  * ListObjectsDemo展示了如何列出object

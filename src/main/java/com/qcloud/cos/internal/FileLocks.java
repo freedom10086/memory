@@ -1,17 +1,16 @@
 package com.qcloud.cos.internal;
 
+import com.qcloud.cos.exception.FileLockException;
+import com.qcloud.cos.utils.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.util.Map;
 import java.util.TreeMap;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.qcloud.cos.exception.FileLockException;
-import com.qcloud.cos.utils.IOUtils;
 
 /**
  * An internal utility used to provide both inter and intra JVM file locking.

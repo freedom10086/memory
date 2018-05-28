@@ -1,8 +1,8 @@
 package com.qcloud.cos.model;
 
-import java.io.Serializable;
-
 import com.qcloud.cos.internal.CosServiceRequest;
+
+import java.io.Serializable;
 
 /**
  * Contains options for setting the cross origin configuration for a bucket.

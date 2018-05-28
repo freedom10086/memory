@@ -1,10 +1,10 @@
 package com.qcloud.cos.transfer;
 
-import java.util.concurrent.Callable;
-
 import com.qcloud.cos.COS;
 import com.qcloud.cos.model.CopyPartRequest;
 import com.qcloud.cos.model.PartETag;
+
+import java.util.concurrent.Callable;
 
 /**
  * An implementation of the Callable interface responsible for carrying out the

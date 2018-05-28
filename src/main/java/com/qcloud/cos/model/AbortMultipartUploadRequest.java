@@ -1,8 +1,8 @@
 package com.qcloud.cos.model;
 
-import java.io.Serializable;
-
 import com.qcloud.cos.internal.CosServiceRequest;
+
+import java.io.Serializable;
 
 public class AbortMultipartUploadRequest extends CosServiceRequest implements Serializable {
     /** The name of the bucket containing the multipart upload to abort */

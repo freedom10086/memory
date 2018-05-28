@@ -1,9 +1,9 @@
 package com.qcloud.cos.internal;
 
+import com.qcloud.cos.exception.CosClientException;
+
 import java.io.IOException;
 import java.io.InputStream;
-
-import com.qcloud.cos.exception.CosClientException;
 
 /**
  * Filtered input stream implementation that exposes a range of an input stream

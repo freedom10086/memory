@@ -1,10 +1,10 @@
 package com.qcloud.cos.internal;
 
-import java.io.FileInputStream;
-import java.io.InputStream;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 /**
  * An input stream that can have the close operation disabled (to avoid accidentally being closed).

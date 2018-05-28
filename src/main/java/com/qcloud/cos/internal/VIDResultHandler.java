@@ -1,9 +1,9 @@
 package com.qcloud.cos.internal;
 
-import java.util.Map;
-
 import com.qcloud.cos.Headers;
 import com.qcloud.cos.http.CosHttpResponse;
+
+import java.util.Map;
 
 public class VIDResultHandler<T extends VIDResult> implements HeaderHandler<T> {
     @Override

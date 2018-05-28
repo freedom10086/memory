@@ -1,8 +1,8 @@
 package com.qcloud.cos.internal;
 
-import java.io.InputStream;
-
 import com.qcloud.cos.COSClient;
+
+import java.io.InputStream;
 
 /**
  * This wrapper input stream holds a reference to the service client. This is

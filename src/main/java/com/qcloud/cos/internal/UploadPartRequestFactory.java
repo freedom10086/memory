@@ -1,13 +1,13 @@
 package com.qcloud.cos.internal;
 
-import java.io.File;
-import java.io.FileInputStream;
-
 import com.qcloud.cos.model.PutObjectRequest;
 import com.qcloud.cos.model.SSECustomerKey;
 import com.qcloud.cos.model.UploadPartRequest;
 import com.qcloud.cos.transfer.TransferManager;
 import com.qcloud.cos.transfer.TransferManagerUtils;
+
+import java.io.File;
+import java.io.FileInputStream;
 
 /**
  * Factory for creating all the individual UploadPartRequest objects for a

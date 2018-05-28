@@ -1,9 +1,5 @@
 package com.qcloud.cos.utils;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.Writer;
-
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
@@ -12,6 +8,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.qcloud.cos.exception.CosClientException;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.Writer;
 
 public enum Jackson {
     ;

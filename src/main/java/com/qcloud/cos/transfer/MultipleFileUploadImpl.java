@@ -1,11 +1,11 @@
 package com.qcloud.cos.transfer;
 
-import java.util.Collection;
-import java.util.Collections;
-
 import com.qcloud.cos.event.ProgressListenerChain;
 import com.qcloud.cos.exception.CosClientException;
 import com.qcloud.cos.exception.CosServiceException;
+
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Multiple file upload when uploading an entire directory.

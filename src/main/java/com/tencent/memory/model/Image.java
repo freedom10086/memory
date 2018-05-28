@@ -1,6 +1,9 @@
 package com.tencent.memory.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tencent.memory.config.Config;
+
+import java.time.LocalDateTime;
 
 /**
  * 相册里面的的单张图片
@@ -8,10 +11,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Image {
     public long id;
 
+    public long galleryId;
+
     @JsonIgnore
     public long groupId;
-
-    public long galleryId;
 
     public String url;
     public User creater;
@@ -20,5 +23,9 @@ public class Image {
     public int likes;
     public int comments;
 
-    public String created;
+    public LocalDateTime created;
+
+    public String getUrl() {
+        return Config.bucketPathCdnPrefix + url;
+    }
 }

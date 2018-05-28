@@ -10,59 +10,18 @@ import com.qcloud.image.common_utils.CommonCodecUtils;
 import com.qcloud.image.common_utils.CommonFileUtils;
 import com.qcloud.image.exception.AbstractImageException;
 import com.qcloud.image.exception.ParamException;
-import com.qcloud.image.http.AbstractImageHttpClient;
-import com.qcloud.image.http.HttpContentType;
-import com.qcloud.image.http.HttpMethod;
-import com.qcloud.image.http.HttpRequest;
-import com.qcloud.image.http.RequestBodyKey;
-import com.qcloud.image.http.RequestHeaderKey;
+import com.qcloud.image.http.*;
 import com.qcloud.image.request.AbstractBaseRequest.BytesContent;
-import com.qcloud.image.request.FaceAddFaceRequest;
-import com.qcloud.image.request.FaceAddGroupIdsRequest;
-import com.qcloud.image.request.FaceCompareRequest;
-import com.qcloud.image.request.FaceDelFaceRequest;
-import com.qcloud.image.request.FaceDelGroupIdsRequest;
-import com.qcloud.image.request.FaceDelPersonRequest;
-import com.qcloud.image.request.FaceDetectRequest;
-import com.qcloud.image.request.FaceGetFaceIdsRequest;
-import com.qcloud.image.request.FaceGetFaceInfoRequest;
-import com.qcloud.image.request.FaceGetGroupIdsRequest;
-import com.qcloud.image.request.FaceGetInfoRequest;
-import com.qcloud.image.request.FaceGetPersonIdsRequest;
-import com.qcloud.image.request.FaceIdCardCompareRequest;
-import com.qcloud.image.request.FaceIdCardLiveDetectFourRequest;
-import com.qcloud.image.request.FaceIdentifyRequest;
-import com.qcloud.image.request.FaceLiveDetectFourRequest;
-import com.qcloud.image.request.FaceLiveDetectPictureRequest;
-import com.qcloud.image.request.FaceLiveGetFourRequest;
-import com.qcloud.image.request.FaceMultiIdentifyRequest;
-import com.qcloud.image.request.FaceNewPersonRequest;
-import com.qcloud.image.request.FaceSetInfoRequest;
-import com.qcloud.image.request.FaceShapeRequest;
-import com.qcloud.image.request.FaceVerifyRequest;
-import com.qcloud.image.request.GeneralOcrRequest;
-import com.qcloud.image.request.IdcardDetectRequest;
-import com.qcloud.image.request.NamecardDetectRequest;
-import com.qcloud.image.request.OcrBankCardRequest;
-import com.qcloud.image.request.OcrBizLicenseRequest;
-import com.qcloud.image.request.OcrDrivingLicenceRequest;
-import com.qcloud.image.request.OcrPlateRequest;
-import com.qcloud.image.request.PornDetectRequest;
-import com.qcloud.image.request.TagDetectRequest;
+import com.qcloud.image.request.*;
 import com.qcloud.image.sign.Credentials;
 import com.qcloud.image.sign.Sign;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.HashMap;
 
-import static com.qcloud.image.ClientConfig.OCR_BANKCARD;
-import static com.qcloud.image.ClientConfig.OCR_BIZLICENSE;
-import static com.qcloud.image.ClientConfig.OCR_DRIVINGLICENCE;
-import static com.qcloud.image.ClientConfig.OCR_GENERAL;
-import static com.qcloud.image.ClientConfig.OCR_PLATE;
+import static com.qcloud.image.ClientConfig.*;
 
 /**
  *

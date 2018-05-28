@@ -1,11 +1,11 @@
 package com.qcloud.cos.transfer;
 
-import java.io.IOException;
-import java.util.Collection;
-
 import com.qcloud.cos.event.ProgressListenerChain;
 import com.qcloud.cos.exception.CosClientException;
 import com.qcloud.cos.exception.CosServiceException;
+
+import java.io.IOException;
+import java.util.Collection;
 
 /**
  * Multiple file download when downloading an entire virtual directory.

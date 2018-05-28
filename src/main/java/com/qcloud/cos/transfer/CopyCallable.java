@@ -1,6 +1,14 @@
 package com.qcloud.cos.transfer;
 
-import static com.qcloud.cos.event.SDKProgressPublisher.publishProgress;
+import com.qcloud.cos.COS;
+import com.qcloud.cos.event.ProgressEventType;
+import com.qcloud.cos.event.ProgressListenerChain;
+import com.qcloud.cos.internal.CopyImpl;
+import com.qcloud.cos.model.*;
+import com.qcloud.cos.region.Region;
+import com.qcloud.cos.transfer.Transfer.TransferState;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,23 +17,7 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import com.qcloud.cos.COS;
-import com.qcloud.cos.event.ProgressEventType;
-import com.qcloud.cos.event.ProgressListenerChain;
-import com.qcloud.cos.internal.CopyImpl;
-import com.qcloud.cos.model.AbortMultipartUploadRequest;
-import com.qcloud.cos.model.CopyObjectRequest;
-import com.qcloud.cos.model.CopyObjectResult;
-import com.qcloud.cos.model.CopyPartRequest;
-import com.qcloud.cos.model.CopyResult;
-import com.qcloud.cos.model.InitiateMultipartUploadRequest;
-import com.qcloud.cos.model.ObjectMetadata;
-import com.qcloud.cos.model.PartETag;
-import com.qcloud.cos.region.Region;
-import com.qcloud.cos.transfer.Transfer.TransferState;
+import static com.qcloud.cos.event.SDKProgressPublisher.publishProgress;
 
 public class CopyCallable implements Callable<CopyResult> {
 

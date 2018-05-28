@@ -1,10 +1,9 @@
 package com.qcloud.cos.model;
 
-import java.io.Serializable;
+import com.qcloud.cos.utils.Base64;
 
 import javax.crypto.SecretKey;
-
-import com.qcloud.cos.utils.Base64;
+import java.io.Serializable;
 
 
 /**

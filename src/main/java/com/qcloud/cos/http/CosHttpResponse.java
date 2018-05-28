@@ -1,10 +1,10 @@
 package com.qcloud.cos.http;
 
+import org.apache.http.client.methods.HttpRequestBase;
+
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.http.client.methods.HttpRequestBase;
 
 public class CosHttpResponse {
 

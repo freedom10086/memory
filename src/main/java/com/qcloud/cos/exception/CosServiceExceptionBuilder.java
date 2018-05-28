@@ -1,9 +1,9 @@
 package com.qcloud.cos.exception;
 
+import com.qcloud.cos.exception.CosServiceException.ErrorType;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import com.qcloud.cos.exception.CosServiceException.ErrorType;
 
 public class CosServiceExceptionBuilder {
 

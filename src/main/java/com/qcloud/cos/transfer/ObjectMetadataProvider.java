@@ -1,8 +1,8 @@
 package com.qcloud.cos.transfer;
 
-import java.io.File;
-
 import com.qcloud.cos.model.ObjectMetadata;
+
+import java.io.File;
 
 /**
  * This is the callback interface which is used by TransferManager.uploadDirectory and

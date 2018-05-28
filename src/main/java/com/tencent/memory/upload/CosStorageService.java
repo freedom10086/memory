@@ -1,6 +1,5 @@
 package com.tencent.memory.upload;
 
-import com.qcloud.cos.transfer.Upload;
 import com.tencent.memory.config.Config;
 import com.tencent.memory.config.UploadConfig;
 import com.tencent.memory.model.MyException;
@@ -14,10 +13,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.stream.Stream;
 
 /**

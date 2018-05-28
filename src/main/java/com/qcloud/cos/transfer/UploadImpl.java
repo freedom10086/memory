@@ -1,14 +1,14 @@
 package com.qcloud.cos.transfer;
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-
 import com.qcloud.cos.event.ProgressListenerChain;
 import com.qcloud.cos.event.TransferStateChangeListener;
 import com.qcloud.cos.exception.CosClientException;
 import com.qcloud.cos.exception.CosServiceException;
 import com.qcloud.cos.exception.PauseException;
 import com.qcloud.cos.model.UploadResult;
+
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 
 public class UploadImpl extends AbstractTransfer implements Upload {

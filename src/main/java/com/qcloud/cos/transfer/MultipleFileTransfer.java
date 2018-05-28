@@ -1,10 +1,10 @@
 package com.qcloud.cos.transfer;
 
-import java.util.Collection;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import com.qcloud.cos.event.ProgressEventType;
 import com.qcloud.cos.event.ProgressListenerChain;
+
+import java.util.Collection;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Interface for multiple file transfers

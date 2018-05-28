@@ -1,11 +1,11 @@
 package com.qcloud.cos.event;
 
-import java.util.concurrent.CountDownLatch;
-
 import com.qcloud.cos.exception.CosClientException;
 import com.qcloud.cos.transfer.MultipleFileTransfer;
 import com.qcloud.cos.transfer.Transfer;
 import com.qcloud.cos.transfer.Transfer.TransferState;
+
+import java.util.concurrent.CountDownLatch;
 
 public final class MultipleFileTransferStateChangeListener implements TransferStateChangeListener {
     private final CountDownLatch latch;

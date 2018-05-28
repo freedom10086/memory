@@ -1,13 +1,13 @@
 package com.qcloud.cos.model;
 
+import com.qcloud.cos.Headers;
+import com.qcloud.cos.internal.ObjectExpirationResult;
+import com.qcloud.cos.internal.ObjectRestoreResult;
+
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.qcloud.cos.Headers;
-import com.qcloud.cos.internal.ObjectExpirationResult;
-import com.qcloud.cos.internal.ObjectRestoreResult;
 
 
 /**

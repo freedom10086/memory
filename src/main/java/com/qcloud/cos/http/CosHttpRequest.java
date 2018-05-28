@@ -1,12 +1,11 @@
 package com.qcloud.cos.http;
 
-import java.io.InputStream;
-import java.net.URI;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.qcloud.cos.event.ProgressListener;
 import com.qcloud.cos.internal.CosServiceRequest;
+
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CosHttpRequest<T extends CosServiceRequest> {
 

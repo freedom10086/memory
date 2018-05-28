@@ -1,12 +1,12 @@
 package com.qcloud.cos.model;
 
+import com.qcloud.cos.model.lifecycle.LifecycleFilter;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
-import com.qcloud.cos.model.lifecycle.LifecycleFilter;
 
 
 /**

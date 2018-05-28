@@ -1,18 +1,18 @@
 package com.qcloud.cos.transfer;
 
-import static com.qcloud.cos.event.SDKProgressPublisher.publishProgress;
-
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-
 import com.qcloud.cos.event.ProgressEventType;
 import com.qcloud.cos.event.ProgressListener;
 import com.qcloud.cos.event.ProgressListenerChain;
 import com.qcloud.cos.event.TransferStateChangeListener;
 import com.qcloud.cos.exception.CosClientException;
 import com.qcloud.cos.exception.CosServiceException;
+
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+
+import static com.qcloud.cos.event.SDKProgressPublisher.publishProgress;
 
 /**
  * Abstract transfer implementation.

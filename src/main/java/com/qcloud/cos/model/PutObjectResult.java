@@ -1,9 +1,9 @@
 package com.qcloud.cos.model;
 
+import com.qcloud.cos.internal.ObjectExpirationResult;
+
 import java.io.Serializable;
 import java.util.Date;
-
-import com.qcloud.cos.internal.ObjectExpirationResult;
 
 public class PutObjectResult implements ObjectExpirationResult, Serializable {
     /**

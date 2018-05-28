@@ -1,10 +1,10 @@
 package com.qcloud.cos.internal;
 
+import com.qcloud.cos.exception.AbortedException;
+
 import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
-import com.qcloud.cos.exception.AbortedException;
 
 /**
  * Base class for COS Java SDK specific {@link FilterInputStream}.

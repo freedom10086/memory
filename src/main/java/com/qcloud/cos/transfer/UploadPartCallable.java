@@ -1,10 +1,10 @@
 package com.qcloud.cos.transfer;
 
-import java.util.concurrent.Callable;
-
 import com.qcloud.cos.COS;
 import com.qcloud.cos.model.PartETag;
 import com.qcloud.cos.model.UploadPartRequest;
+
+import java.util.concurrent.Callable;
 
 public class UploadPartCallable implements Callable<PartETag> {
     private final COS cos;

@@ -20,5 +20,4 @@ public interface UploadService {
     Resource loadAsResource(String filename);
 
     void deleteAll();
-
 }

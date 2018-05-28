@@ -1,13 +1,13 @@
 package com.qcloud.cos.internal;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
 import com.qcloud.cos.exception.CosClientException;
 import com.qcloud.cos.model.CASJobParameters;
 import com.qcloud.cos.model.PartETag;
 import com.qcloud.cos.model.RestoreObjectRequest;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class RequestXmlFactory {
 

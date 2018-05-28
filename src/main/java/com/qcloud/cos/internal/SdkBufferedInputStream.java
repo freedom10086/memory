@@ -1,10 +1,10 @@
 package com.qcloud.cos.internal;
 
+import com.qcloud.cos.exception.AbortedException;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
-import com.qcloud.cos.exception.AbortedException;
 
 public class SdkBufferedInputStream extends BufferedInputStream {
     public SdkBufferedInputStream(InputStream in) {

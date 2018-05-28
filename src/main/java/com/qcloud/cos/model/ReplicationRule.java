@@ -1,7 +1,8 @@
 package com.qcloud.cos.model;
 
-import java.io.Serializable;
 import com.qcloud.cos.utils.Jackson;
+
+import java.io.Serializable;
 
 /**
  * Rule that specifies the replication configuration.

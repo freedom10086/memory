@@ -1,25 +1,18 @@
 package com.qcloud.cos.utils;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.SocketException;
-import java.util.Arrays;
-
-import javax.net.ssl.SSLProtocolException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.qcloud.cos.exception.CosClientException;
 import com.qcloud.cos.exception.FileLockException;
 import com.qcloud.cos.internal.FileLocks;
 import com.qcloud.cos.internal.SkipMd5CheckStrategy;
 import com.qcloud.cos.model.COSObject;
 import com.qcloud.cos.model.ObjectMetadata;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.net.ssl.SSLProtocolException;
+import java.io.*;
+import java.net.SocketException;
+import java.util.Arrays;
 
 public class ServiceUtils {
     private static final Logger log = LoggerFactory.getLogger(ServiceUtils.class);

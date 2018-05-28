@@ -1,12 +1,11 @@
 package com.tencent.memory.controller;
 
-import com.tencent.memory.config.Config;
 import com.tencent.memory.model.ApiResult;
 import com.tencent.memory.model.ApiResultBuilder;
 import com.tencent.memory.model.UploadResult;
+import com.tencent.memory.service.UploadService;
 import com.tencent.memory.upload.CosStorageService;
 import com.tencent.memory.upload.StorageFileNotFoundException;
-import com.tencent.memory.service.UploadService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

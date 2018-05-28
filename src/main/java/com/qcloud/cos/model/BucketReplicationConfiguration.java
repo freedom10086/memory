@@ -1,10 +1,10 @@
 package com.qcloud.cos.model;
 
+import com.qcloud.cos.utils.Jackson;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.qcloud.cos.utils.Jackson;
 
 public class BucketReplicationConfiguration implements Serializable {
 
