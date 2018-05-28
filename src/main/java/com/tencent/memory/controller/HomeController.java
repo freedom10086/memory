@@ -2,6 +2,7 @@ package com.tencent.memory.controller;
 
 
 import com.tencent.memory.config.Config;
+import com.tencent.memory.model.InviteCode;
 import com.tencent.memory.util.Sign;
 import com.tencent.memory.util.Token;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,8 +26,15 @@ public class HomeController {
 
     @ResponseBody
     @RequestMapping(value = "/gen_token")
-    public String token() throws Exception {
+    public String token() {
         Token token = new Token(1, Token.day);
         return token.genToken(Config.tokenSecretKey);
+    }
+
+    @ResponseBody
+    @RequestMapping("/invite_code")
+    public String inviteCode() {
+        InviteCode inviteCode = new InviteCode(1, 1, Token.day * 3);
+        return inviteCode.genInviteCode(Config.inviteSecreateKey);
     }
 }

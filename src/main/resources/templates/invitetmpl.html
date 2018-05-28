@@ -1,0 +1,12 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+    <meta charset="UTF-8">
+    <title th:text="相册${name}-印迹">邀请加入相册{name}-印迹</title>
+</head>
+<body>
+<p th:text="${inviter}邀请你加入相册${galleryName} 是否同意?"> {xx}邀请你加入相册{xx} 是否同意?</p>
+<a th:href="memory://invite?invitecode=${invitecode}">同意</a>
+</body>
+</html>

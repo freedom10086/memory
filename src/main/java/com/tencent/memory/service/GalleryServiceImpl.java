@@ -70,6 +70,11 @@ public class GalleryServiceImpl implements GalleryService {
     }
 
     @Override
+    public Gallery loadGalleryWithoutImage(long galleryId) {
+        return galleryMapper.findById(galleryId);
+    }
+
+    @Override
     public List<Gallery> loadMyGalleries(long uid, Paging paging, Order order) {
         List<Gallery> galleries = galleryMapper.getAllByCreated(uid, paging.start, paging.size, order.value);
 

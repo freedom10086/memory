@@ -23,7 +23,7 @@ public class CommentController {
     }
 
     // 查询评论列表
-    @GetMapping("/comments/{imageId}/")
+    @GetMapping("/images/{imageId}/comments/")
     public ApiResult<List<Comment>> getsComments(HttpServletRequest req,
                                                  @PathVariable("imageId") long imageId) {
         Long uid = (Long) req.getAttribute(Attrs.uid);
@@ -33,9 +33,9 @@ public class CommentController {
     }
 
     // 提交评论
-    @PostMapping("/comments/")
+    @PostMapping("/images/{imageId}/comments/")
     public ApiResult<Comment> addComment(HttpServletRequest req,
-                                         @RequestParam("imageId") long imageId,
+                                         @PathVariable("imageId") long imageId,
                                          @RequestParam("content") String content) {
         Long uid = (Long) req.getAttribute(Attrs.uid);
         boolean exist = imageService.isExist(imageId);

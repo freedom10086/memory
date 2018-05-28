@@ -21,7 +21,7 @@ public class Bucket implements Serializable {
     public Bucket() {}
 
     /**
-     * Creates a bucket with a name. 
+     * Creates a bucket with a name.
      * All buckets in Qcloud COS share a single namespace;
      * ensure the bucket is given a unique name.
      *
@@ -106,7 +106,7 @@ public class Bucket implements Serializable {
     }
 
     /**
-     * Sets the name of the bucket. 
+     * Sets the name of the bucket.
      * All buckets in Qcloud COS share a single namespace;
      * ensure the bucket is given a unique name.
      *

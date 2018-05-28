@@ -11,13 +11,21 @@ import java.util.List;
 @Component
 public interface UserMapper {
 
+    String USER_COLUNM = "user.id as user_id, " +
+            "user.name as user_name, " +
+            "user.created as user_created, " +
+            "user.avatar," +
+            "user.gender," +
+            "user.openId ";
+
     @Insert("INSERT INTO user(openId,name,avatar,gender) VALUES " +
             "(#{openId},#{name},#{avatar},#{gender})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insert(User user);
 
     @Select("SELECT * FROM user WHERE id = #{uid}")
-    @ResultMap("com.tencent.memory.dao.UserMapper.userMap")  // 引用XML里配置的映射器
+    @ResultMap("com.tencent.memory.dao.UserMapper.userMap")
+        // 引用XML里配置的映射器
     User findById(@Param("uid") int uid);
 
     @Select("SELECT * FROM user WHERE openId = #{openId}")

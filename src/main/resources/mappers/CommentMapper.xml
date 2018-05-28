@@ -10,11 +10,11 @@
     </resultMap>
 
     <resultMap id="userMap" type="User">
-        <id column="id" jdbcType="BIGINT" property="id"/>
+        <id column="user_id" jdbcType="BIGINT" property="id"/>
         <result column="openId" jdbcType="VARCHAR" property="openId"/>
-        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="user_name" jdbcType="VARCHAR" property="name"/>
         <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
         <result column="gender" jdbcType="VARCHAR" property="gender"/>
-        <result column="created" jdbcType="TIMESTAMP" property="created"/>
+        <result column="user_created" jdbcType="TIMESTAMP" property="created"/>
     </resultMap>
 </mapper>

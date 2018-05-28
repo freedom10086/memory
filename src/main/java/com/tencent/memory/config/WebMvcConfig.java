@@ -28,7 +28,9 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 "/search/*",
                 "/comments/*",
                 "/images/*",
-                "/likes/*");
+                "/likes/*",
+                "/invite/",
+                "/invite/join");
         registration.setName("AuthFilter");
         registration.setOrder(1);
         return registration;
@@ -40,7 +42,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registration.setFilter(new PagingFilter());
         registration.addUrlPatterns(
                 "/galleries/*",
-                "/files/",
                 "/search/*",
                 "/comments/*",
                 "/images/*");

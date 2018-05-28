@@ -25,6 +25,7 @@ public class Gallery {
     public LocalDateTime updated;
 
     public String getCover() {
+        if (cover == null) return null;
         return Config.bucketPathCdnPrefix + cover;
     }
 

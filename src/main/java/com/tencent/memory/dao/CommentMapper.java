@@ -16,7 +16,7 @@ public interface CommentMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insert(Comment comment);
 
-    @Select("SELECT * FROM comment " +
+    @Select("SELECT comment.*," + UserMapper.USER_COLUNM + " from comment " +
             "inner join user on user.id = comment.creater " +
             "WHERE comment.id = #{id}")
     @ResultMap("com.tencent.memory.dao.CommentMapper.commentMap")
@@ -24,7 +24,7 @@ public interface CommentMapper {
 
 
     // 查询某个图片的所有评论
-    @Select("SELECT * FROM comment " +
+    @Select("SELECT comment.*," + UserMapper.USER_COLUNM + " FROM comment " +
             "inner join user on user.id = comment.creater " +
             "where comment.imageId = #{imageId} " +
             "order by comment.created ${order} " +

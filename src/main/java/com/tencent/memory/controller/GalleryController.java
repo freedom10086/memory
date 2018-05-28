@@ -59,25 +59,6 @@ public class GalleryController {
         }
     }
 
-    // 接受邀请添加相册
-    @PostMapping(value = "/galleries/join", produces = "application/json")
-    public ApiResult<Gallery> addGallery(HttpServletRequest req,
-                                         @RequestParam("invitecode") String inviteCode) {
-        // TODO
-
-        return null;
-    }
-
-
-    // 接受邀请添加相册
-    @GetMapping("/galleries/join")
-    public ApiResult<Gallery> addGallery1(HttpServletRequest req,
-                                          @RequestParam("invitecode") String inviteCode) {
-        // TODO
-
-        return null;
-    }
-
     // 获取指定相册
     // 同时返回里面的数据的分页
     @GetMapping("/galleries/{galleryId}")

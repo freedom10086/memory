@@ -69,9 +69,9 @@ public class ImageController {
 
     // 给相册添加图片
     // images Image数组
-    @PostMapping("/images/")
+    @PostMapping("/galleries/{galleryId}/images/")
     public ApiResult<Integer> addImageToGallery(HttpServletRequest req,
-                                                @RequestParam("galleryId") long galleryId,
+                                                @PathVariable("galleryId") long galleryId,
                                                 @RequestParam("images") String images,
                                                 @RequestParam("description") String description) {
 

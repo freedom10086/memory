@@ -10,12 +10,14 @@ import java.util.List;
 @Component
 public interface GalleryMapper {
 
+
     @Insert("INSERT INTO gallery(name,description,type,creater) VALUES " +
             "(#{name},#{description},#{type},#{creater.id})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     int insert(Gallery gallery);
 
-    @Select("SELECT * FROM gallery " +
+    @Select("SELECT gallery.*, " + UserMapper.USER_COLUNM +
+            "FROM gallery " +
             "inner join user on user.id = gallery.creater " +
             "WHERE gallery.id = #{id}")
     @ResultMap("com.tencent.memory.dao.GalleryMapper.galleryMap")
@@ -23,7 +25,7 @@ public interface GalleryMapper {
     Gallery findById(@Param("id") long id);
 
     // 搜索我的所有相册
-    @Select("SELECT * FROM gallery " +
+    @Select("SELECT gallery.*," + UserMapper.USER_COLUNM + " FROM gallery " +
             "inner join user on user.id = gallery.creater " +
             "inner join user_gallery on user_gallery.galleryId = gallery.id " +
             "where gallery.id in (select user_gallery.galleryId from user_gallery where user_gallery.uid = #{uid}) " +
@@ -37,7 +39,7 @@ public interface GalleryMapper {
 
 
     // 获取我的所有相册
-    @Select("SELECT * FROM gallery " +
+    @Select("SELECT gallery.*, " + UserMapper.USER_COLUNM + " FROM gallery " +
             "inner join user on user.id = gallery.creater " +
             "inner join user_gallery on user_gallery.galleryId = gallery.id " +
             "where gallery.id in (select user_gallery.galleryId from user_gallery where user_gallery.uid = #{uid}) " +

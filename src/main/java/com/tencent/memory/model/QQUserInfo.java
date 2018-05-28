@@ -26,7 +26,7 @@ public class QQUserInfo {
                 "ret=" + ret +
                 ", msg='" + msg + '\'' +
                 ", is_lost=" + is_lost +
-                ", nickname='" + nickname + '\'' +
+                ", name='" + nickname + '\'' +
                 ", gender='" + gender + '\'' +
                 ", province='" + province + '\'' +
                 ", city='" + city + '\'' +
