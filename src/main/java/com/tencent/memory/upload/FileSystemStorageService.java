@@ -53,11 +53,26 @@ public class FileSystemStorageService implements UploadService {
 
             UploadResult result = new UploadResult();
             result.url = path.toString();
-            return  result;
+            return result;
         } catch (IOException e) {
             throw new StorageException("Failed to store file " + filename, e);
         }
 
+    }
+
+    @Override
+    public UploadResult store(InputStream inputStream) {
+        Path path = this.rootLocation.resolve(System.currentTimeMillis() + "");
+
+        try {
+            Files.copy(inputStream, path, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            throw new StorageException("Failed to store file ", e);
+        }
+
+        UploadResult result = new UploadResult();
+        result.url = path.toString();
+        return result;
     }
 
     @Override

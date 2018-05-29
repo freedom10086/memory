@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.concurrent.ExecutionException;
@@ -52,6 +54,24 @@ public class CosStorageService implements UploadService {
             throw new MyException(HttpStatus.BAD_REQUEST, "can not read file byte!");
         }
 
+        return getUploadResult(size, contentType, data);
+    }
+
+    @Override
+    public UploadResult store(InputStream inputStream) {
+        long size;
+        String contentType = "image/jpeg";
+        byte[] data;
+        try {
+            data = FileCopyUtils.copyToByteArray(inputStream);
+            size = data.length;
+        } catch (IOException e) {
+            throw new MyException(HttpStatus.BAD_REQUEST, "can not read file byte!");
+        }
+        return getUploadResult(size, contentType, data);
+    }
+
+    private UploadResult getUploadResult(long size, String contentType, byte[] data) {
         // 上传缩略图
         Future<UploadResult> ft = null;
         if (properties.isEnableThumbnail() && size > properties.getThumbnailLimitSize()) {

@@ -4,7 +4,6 @@ import com.tencent.memory.model.ApiResult;
 import com.tencent.memory.model.ApiResultBuilder;
 import com.tencent.memory.model.UploadResult;
 import com.tencent.memory.service.UploadService;
-import com.tencent.memory.upload.CosStorageService;
 import com.tencent.memory.upload.StorageFileNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,13 +17,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- *  图片上传处理
- *  图片大小如果超过设置thumbnailLimitSize的大小会生成缩略图
- *  大小同样见配置maxThumbnailWidth & maxThumbnailHeight,缩略图会有尾缀‘S’不带尾缀访问的就是原图
+ * 图片上传处理
+ * 图片大小如果超过设置thumbnailLimitSize的大小会生成缩略图
+ * 大小同样见配置maxThumbnailWidth & maxThumbnailHeight,缩略图会有尾缀‘S’不带尾缀访问的就是原图
  */
 @RestController
 public class UploadController {
@@ -55,19 +55,24 @@ public class UploadController {
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);
     }
 
+    //浏览器上传的接口
     @PostMapping("/files/")
     @ResponseBody
     public ApiResult<UploadResult> handleFileUpload(@RequestParam("file") MultipartFile file) {
         long start = System.currentTimeMillis();
         UploadResult result = storageService.store(file);
         logger.info("upload cost: {}ms", System.currentTimeMillis() - start);
-        if (storageService instanceof CosStorageService) {
-            return new ApiResultBuilder<UploadResult>().success(result).build();
-        } else {
-            //file.getOriginalFilename()
-            return new ApiResultBuilder<UploadResult>().success(result).build();
-        }
+        return new ApiResultBuilder<UploadResult>().success(result).build();
+    }
 
+    //客户端上传的原始数据
+    @PostMapping("/files/raw")
+    @ResponseBody
+    public ApiResult<UploadResult> handleRawFileUpload(InputStream inputStream) {
+        long start = System.currentTimeMillis();
+        UploadResult result = storageService.store(inputStream);
+        logger.info("upload cost: {}ms", System.currentTimeMillis() - start);
+        return new ApiResultBuilder<UploadResult>().success(result).build();
     }
 
     @ExceptionHandler(StorageFileNotFoundException.class)
