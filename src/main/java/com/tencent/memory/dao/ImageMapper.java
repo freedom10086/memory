@@ -59,7 +59,7 @@ public interface ImageMapper {
                                 @Param("order") String order);
 
     // 查询所有相册里面所有的图片组
-    @Select("select image.*," + UserMapper.USER_COLUNM + " from image as v  " +
+    @Select("select v.*," + UserMapper.USER_COLUNM + " from image as v  " +
             "INNER JOIN (select image_group.id from image_group where image_group.galleryId in " +
             "(select galleryId from user_gallery where user_gallery.uid = #{uid}) " +
             "order by id DESC  limit #{size} offset #{start}) as v2 ON v.groupId = v2.id " +
@@ -73,7 +73,7 @@ public interface ImageMapper {
 
     // 查询某个相册里面所有的图片组
     // 要分页
-    @Select("select image.*," + UserMapper.USER_COLUNM + " from image as v  " +
+    @Select("select v.*," + UserMapper.USER_COLUNM + " from image as v  " +
             "INNER JOIN (select image_group.id from image_group where image_group.galleryId = #{galleryId} " +
             "order by id DESC  limit #{size} offset #{start}) as v2 ON v.groupId = v2.id " +
             "inner join user on v.creater = user.id  " +

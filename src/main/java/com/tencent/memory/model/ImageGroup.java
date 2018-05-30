@@ -12,6 +12,10 @@ public class ImageGroup {
     public List<Image> images;
     public LocalDateTime created;
 
+    public ImageGroup() {
+        created = LocalDateTime.now();
+    }
+
     public void addImage(Image image) {
         if (images == null) {
             images = new ArrayList<>();

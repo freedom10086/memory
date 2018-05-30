@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -47,14 +48,17 @@ public class LoginController {
             user.avatar = info.figureurl_qq_2;
             user.gender = info.gender;
             user.openId = openid;
+            user.created = LocalDateTime.now();
 
             logger.info("create user openid: {}", openid);
 
             userMapper.insert(user);
+
+            logger.info("create user success: {}", user);
         }
 
         UserWithToken result = new UserWithToken(user);
-        result.token = new Token(user.id, Config.DAY).genToken(Config.tokenSecretKey);
+        result.token = new Token(user.id, Token.day * 3).genToken(Config.tokenSecretKey);
 
         return new ApiResultBuilder<User>().success(result).build();
     }

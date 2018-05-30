@@ -3,13 +3,12 @@ package com.tencent.memory.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tencent.memory.config.Attrs;
 import com.tencent.memory.config.Config;
-import com.tencent.memory.model.ApiResult;
-import com.tencent.memory.model.ApiResultBuilder;
-import com.tencent.memory.model.Image;
-import com.tencent.memory.model.ImageGroup;
+import com.tencent.memory.model.*;
 import com.tencent.memory.service.ImageService;
 import com.tencent.memory.util.Paging;
 import com.tencent.memory.util.TextUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +25,7 @@ import java.util.List;
 @RestController
 public class ImageController {
 
+    private static final Logger logger = LoggerFactory.getLogger(ImageController.class);
     private final ImageService imageService;
 
     @Autowired
@@ -74,15 +74,16 @@ public class ImageController {
                                                 @PathVariable("galleryId") long galleryId,
                                                 @RequestParam("images") String images,
                                                 @RequestParam("description") String description) {
-
+        logger.info("request params -- galleryId:{}, images:{}, des:{}", galleryId, images, description);
         Long uid = (Long) req.getAttribute(Attrs.uid);
-        Image[] imageArray;
+        UploadRequest[] imageArray;
         try {
-            imageArray = new ObjectMapper().readValue(images, Image[].class);
+            imageArray = new ObjectMapper().readValue(images, UploadRequest[].class);
         } catch (IOException e) {
-            //e.printStackTrace();
+            logger.error("addImageToGallery failed: {}", e.getMessage());
+            e.printStackTrace();
             return new ApiResultBuilder<Integer>()
-                    .error(HttpStatus.BAD_REQUEST.value(), "images解析错误:"+e.getMessage()).build();
+                    .error(HttpStatus.BAD_REQUEST.value(), "images解析错误:" + e.getMessage()).build();
         }
 
         if (imageArray.length == 0) {
@@ -90,13 +91,14 @@ public class ImageController {
                     .error(HttpStatus.BAD_REQUEST.value(), "需要上传的图片不能为空").build();
         }
 
-        for (Image image : imageArray) {
+        for (UploadRequest image : imageArray) {
             if (TextUtils.isEmpty(image.url) || !image.url.startsWith(Config.bucketPathCdnPrefix)) {
                 return new ApiResultBuilder<Integer>()
                         .error(HttpStatus.BAD_REQUEST.value(), "图片地址不合法：" + image.url).build();
             }
 
             image.url = image.url.substring(Config.bucketPathCdnPrefix.length());
+            image.description = description;
         }
 
         int affets = imageService.addImagesToGallery(galleryId, uid, imageArray, description);

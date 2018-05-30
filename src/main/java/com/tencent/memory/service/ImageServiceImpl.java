@@ -5,6 +5,7 @@ import com.tencent.memory.dao.ImageMapper;
 import com.tencent.memory.model.Image;
 import com.tencent.memory.model.ImageGroup;
 import com.tencent.memory.model.Order;
+import com.tencent.memory.model.UploadRequest;
 import com.tencent.memory.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,6 +46,7 @@ public class ImageServiceImpl implements ImageService {
                 imageGroups.get(imageGroups.size() - 1).addImage(image);
             } else {
                 ImageGroup g = new ImageGroup();
+                g.id = image.groupId;
                 g.addImage(image);
                 g.creater = image.creater;
                 imageGroups.add(g);
@@ -76,7 +78,7 @@ public class ImageServiceImpl implements ImageService {
 
     // TODO checkPermission
     @Override
-    public int addImagesToGallery(long galleryId, long uid, Image[] images, String description) {
+    public int addImagesToGallery(long galleryId, long uid, UploadRequest[] images, String description) {
         return imageDao.addImagesToGallery(galleryId, uid, description, images);
     }
 

@@ -17,7 +17,7 @@ public class User {
 
 
     public User() {
-
+        created = LocalDateTime.now();
     }
 
     @Override

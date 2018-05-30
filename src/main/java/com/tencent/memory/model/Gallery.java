@@ -30,6 +30,7 @@ public class Gallery {
     }
 
     public Gallery() {
-
+        created = LocalDateTime.now();
+        updated = LocalDateTime.now();
     }
 }

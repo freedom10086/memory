@@ -1,7 +1,7 @@
 package com.tencent.memory.dao;
 
-import com.tencent.memory.model.Image;
 import com.tencent.memory.model.MyException;
+import com.tencent.memory.model.UploadRequest;
 import com.tencent.memory.util.TextUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,10 +18,12 @@ import java.sql.*;
 public class ImageDao extends JdbcDaoSupport {
 
     private static final Logger logger = LoggerFactory.getLogger(ImageDao.class);
+    private final ImageGroupMapper imageGroupMapper;
 
     @Autowired
-    public ImageDao(DataSource dataSource) {
+    public ImageDao(DataSource dataSource, ImageGroupMapper imageGroupMapper) {
         setDataSource(dataSource);
+        this.imageGroupMapper = imageGroupMapper;
     }
 
     // 新发布一条动态
@@ -29,7 +31,7 @@ public class ImageDao extends JdbcDaoSupport {
     // 1. create_group
     // 2. insert image
     // 3. update_cover 更新封面
-    public int addImagesToGallery(long galleryId, long uid, String description, Image[] images) {
+    public int addImagesToGallery(long galleryId, long uid, String description, UploadRequest[] images) {
         logger.info("add images galleryId:{}, uid:{},images:{}", galleryId, uid, images.length);
         Connection connection = getConnection();
 
@@ -59,7 +61,7 @@ public class ImageDao extends JdbcDaoSupport {
 
 
             pst = connection.prepareStatement(sql2);
-            for (Image image : images) {
+            for (UploadRequest image : images) {
                 pst.setLong(1, galleryId);
                 pst.setLong(2, groupId);
                 pst.setString(3, TextUtils.isEmpty(image.description) ? "" : image.description);
@@ -86,7 +88,13 @@ public class ImageDao extends JdbcDaoSupport {
 
 
         } catch (SQLException e) {
+            if (groupId > 0) {
+                logger.error("insert images failed roll back delete image group {}", groupId);
+                imageGroupMapper.delete(groupId);
+            }
+
             throw new MyException(e);
+
         } finally {
             try {
                 connection.close();

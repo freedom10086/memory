@@ -4,6 +4,7 @@ import com.tencent.memory.config.Attrs;
 import com.tencent.memory.model.ApiResult;
 import com.tencent.memory.model.ApiResultBuilder;
 import com.tencent.memory.model.Gallery;
+import com.tencent.memory.model.User;
 import com.tencent.memory.service.GalleryService;
 import com.tencent.memory.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 
 @RestController
 public class GalleryController {
@@ -32,9 +34,12 @@ public class GalleryController {
         Gallery gallery = new Gallery();
         gallery.name = name;
         gallery.description = description;
+        gallery.creater = new User();
         gallery.creater.id = uid;
         gallery.type = type;
+        gallery.created = LocalDateTime.now();
         galleryService.createGallery(gallery);
+        gallery.creater = null;
 
         return new ApiResultBuilder<Gallery>().success(gallery).build();
     }

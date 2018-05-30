@@ -13,6 +13,6 @@ public class Comment {
     public LocalDateTime created;
 
     public Comment() {
-
+        created = LocalDateTime.now();
     }
 }

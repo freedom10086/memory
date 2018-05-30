@@ -1,5 +1,7 @@
 package com.tencent.memory.model;
 
+import java.time.LocalDateTime;
+
 public class UserWithToken extends User {
     public String token;
 

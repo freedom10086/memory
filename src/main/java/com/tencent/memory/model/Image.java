@@ -25,6 +25,10 @@ public class Image {
 
     public LocalDateTime created;
 
+    public Image() {
+        created = LocalDateTime.now();
+    }
+
     public String getUrl() {
         return Config.bucketPathCdnPrefix + url;
     }
