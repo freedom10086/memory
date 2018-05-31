@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -50,6 +51,8 @@ public class CommentController {
 
         comment.content = content;
         comment.imageId = imageId;
+        comment.created = LocalDateTime.now();
+
         commentService.addComment(comment);
 
         return new ApiResultBuilder<Comment>().success(comment).build();

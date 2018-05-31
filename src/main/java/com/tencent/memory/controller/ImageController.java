@@ -67,6 +67,17 @@ public class ImageController {
         }
     }
 
+    // 按列表查询某个相册里的所有图片
+    @GetMapping("/galleries/{galleryId}/images/")
+    public ApiResult<List<Image>> getAllByGallery(ServletRequest req,
+                                                  @PathVariable("galleryId") long galleryId) {
+        Paging paging = (Paging) req.getAttribute(Attrs.paging);
+        Long uid = (Long) req.getAttribute(Attrs.uid);
+
+        return new ApiResultBuilder<List<Image>>()
+                .success(imageService.getAllByGallery(galleryId, paging)).build();
+    }
+
     // 给相册添加图片
     // images Image数组
     @PostMapping("/galleries/{galleryId}/images/")

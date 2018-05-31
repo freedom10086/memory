@@ -1,6 +1,8 @@
 package com.tencent.memory.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.tencent.memory.config.JsonDateSerializer;
 
 import java.time.LocalDateTime;
 
@@ -13,11 +15,11 @@ public class User {
     public String avatar;
     public String gender;
 
+    @JsonSerialize(using = JsonDateSerializer.class)
     public LocalDateTime created;
 
 
     public User() {
-        created = LocalDateTime.now();
     }
 
     @Override

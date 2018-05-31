@@ -49,6 +49,7 @@ public class ImageServiceImpl implements ImageService {
                 g.id = image.groupId;
                 g.addImage(image);
                 g.creater = image.creater;
+                g.created = image.created;
                 imageGroups.add(g);
             }
         }
@@ -68,11 +69,17 @@ public class ImageServiceImpl implements ImageService {
                 ImageGroup g = new ImageGroup();
                 g.addImage(image);
                 g.creater = image.creater;
+                g.created = image.created;
                 imageGroups.add(g);
             }
         }
 
         return imageGroups;
+    }
+
+    @Override
+    public List<Image> getAllByGallery(long galleryId, Paging paging) {
+        return imageMapper.getAllByGallery(galleryId, paging.start, paging.size, Order.DESC.value);
     }
 
 

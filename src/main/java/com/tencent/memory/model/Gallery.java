@@ -1,6 +1,8 @@
 package com.tencent.memory.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.tencent.memory.config.Config;
+import com.tencent.memory.config.JsonDateSerializer;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,7 +23,10 @@ public class Gallery {
     // 查询Gallery此字段为空
     public List<ImageGroup> groups;
 
+    @JsonSerialize(using = JsonDateSerializer.class)
     public LocalDateTime created;
+
+    @JsonSerialize(using = JsonDateSerializer.class)
     public LocalDateTime updated;
 
     public String getCover() {
@@ -30,7 +35,5 @@ public class Gallery {
     }
 
     public Gallery() {
-        created = LocalDateTime.now();
-        updated = LocalDateTime.now();
     }
 }

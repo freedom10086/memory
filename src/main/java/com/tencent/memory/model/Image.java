@@ -1,7 +1,9 @@
 package com.tencent.memory.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.tencent.memory.config.Config;
+import com.tencent.memory.config.JsonDateSerializer;
 
 import java.time.LocalDateTime;
 
@@ -23,10 +25,10 @@ public class Image {
     public int likes;
     public int comments;
 
+    @JsonSerialize(using = JsonDateSerializer.class)
     public LocalDateTime created;
 
     public Image() {
-        created = LocalDateTime.now();
     }
 
     public String getUrl() {

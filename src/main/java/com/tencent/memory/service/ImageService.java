@@ -17,6 +17,8 @@ public interface ImageService {
 
     List<ImageGroup> getNewsImageGroups(long uid, Paging paging);
 
+    List<Image> getAllByGallery(long galleryId, Paging paging);
+
     // 创建group 再把这些图片插入
     int addImagesToGallery(long galleryId, long uid, UploadRequest[] images, String description);
 

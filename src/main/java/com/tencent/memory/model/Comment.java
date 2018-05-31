@@ -1,5 +1,8 @@
 package com.tencent.memory.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.tencent.memory.config.JsonDateSerializer;
+
 import java.time.LocalDateTime;
 
 /**
@@ -10,9 +13,11 @@ public class Comment {
     public long imageId;
     public String content;
     public User creater;
+
+    @JsonSerialize(using = JsonDateSerializer.class)
     public LocalDateTime created;
 
     public Comment() {
-        created = LocalDateTime.now();
+
     }
 }

@@ -25,6 +25,7 @@ public class InviteController {
         this.galleryService = galleryService;
     }
 
+    // 生成invitecode
     @ResponseBody
     @PostMapping("/invite/")
     public ApiResult<String> genInviteCode(ServletRequest req,
@@ -50,6 +51,7 @@ public class InviteController {
     }
 
     // 不要验证
+    // 检查验证码的有效性
     @ResponseBody
     @RequestMapping("/invite/check")
     public ApiResult<Gallery> checkInviteCode(@RequestParam("invitecode") String code) {
