@@ -4,10 +4,8 @@ package com.tencent.memory.service;
 import com.tencent.memory.dao.GalleryMapper;
 import com.tencent.memory.dao.ImageMapper;
 import com.tencent.memory.dao.UserGalleryMapper;
-import com.tencent.memory.model.Gallery;
-import com.tencent.memory.model.Image;
-import com.tencent.memory.model.ImageGroup;
-import com.tencent.memory.model.Order;
+import com.tencent.memory.dao.UserMapper;
+import com.tencent.memory.model.*;
 import com.tencent.memory.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,14 +19,17 @@ public class GalleryServiceImpl implements GalleryService {
     private final GalleryMapper galleryMapper;
     private final UserGalleryMapper userGalleryMapper;
     private final ImageMapper imageMapper;
+    private final UserMapper userMapper;
 
     @Autowired
     public GalleryServiceImpl(GalleryMapper galleryMapper,
                               UserGalleryMapper userGalleryMapper,
-                              ImageMapper imageMapper) {
+                              ImageMapper imageMapper,
+                              UserMapper userMapper) {
         this.galleryMapper = galleryMapper;
         this.userGalleryMapper = userGalleryMapper;
         this.imageMapper = imageMapper;
+        this.userMapper = userMapper;
     }
 
     // 创建相册
@@ -41,6 +42,11 @@ public class GalleryServiceImpl implements GalleryService {
             userGalleryMapper.addGallery(gallery.creater.id, gallery.id);
         }
         return i;
+    }
+
+    @Override
+    public List<User> loadMembers(long galleryId) {
+        return userMapper.getGalleryAll(galleryId);
     }
 
     // 数据库分页

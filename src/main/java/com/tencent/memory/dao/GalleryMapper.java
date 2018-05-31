@@ -29,7 +29,7 @@ public interface GalleryMapper {
             "inner join user on user.id = gallery.creater " +
             "inner join user_gallery on user_gallery.galleryId = gallery.id " +
             "where gallery.id in (select user_gallery.galleryId from user_gallery where user_gallery.uid = #{uid}) " +
-            "and (gallery.name like %#{name}% or gallery.description like %#{name}%) " +
+            "and (gallery.name like concat('%',#{name},'%')) " +
             "order by user_gallery.created ${order} " +
             "limit #{size} offset #{start}")
     @ResultMap("com.tencent.memory.dao.GalleryMapper.galleryMap")

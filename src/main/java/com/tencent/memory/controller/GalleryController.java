@@ -1,12 +1,11 @@
 package com.tencent.memory.controller;
 
 import com.tencent.memory.config.Attrs;
-import com.tencent.memory.model.ApiResult;
-import com.tencent.memory.model.ApiResultBuilder;
-import com.tencent.memory.model.Gallery;
-import com.tencent.memory.model.User;
+import com.tencent.memory.config.Config;
+import com.tencent.memory.model.*;
 import com.tencent.memory.service.GalleryService;
 import com.tencent.memory.util.Paging;
+import com.tencent.memory.util.Token;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +41,30 @@ public class GalleryController {
         gallery.creater = null;
 
         return new ApiResultBuilder<Gallery>().success(gallery).build();
+    }
+
+
+    // 查询相册成员 和 生成邀请码
+    @GetMapping("/galleries/{galleryId}/members/")
+    public ApiResult<GalleryUsersAndCode> loadCodeAndMembers(HttpServletRequest req,
+                                                             @PathVariable("galleryId") long galleryId) {
+        Long uid = (Long) req.getAttribute(Attrs.uid);
+        GalleryUsersAndCode res = new GalleryUsersAndCode();
+
+        Gallery gallery = galleryService.loadGalleryWithoutImage(galleryId);
+        if(gallery == null ) {
+            return new ApiResultBuilder<GalleryUsersAndCode>()
+                    .error(HttpStatus.BAD_REQUEST.value(), "相册不存在:" + galleryId).build();
+        }
+
+        if (gallery.creater.id == uid) { // can gen invite code
+            InviteCode inviteCode = new InviteCode(galleryId, uid, Token.day);
+            res.inviteCode = inviteCode.genInviteCode(Config.inviteSecreateKey);
+        }
+
+        res.users = galleryService.loadMembers(galleryId);
+
+        return new ApiResultBuilder<GalleryUsersAndCode>().success(res).build();
     }
 
 

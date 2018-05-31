@@ -1,7 +1,9 @@
 package com.tencent.memory.service;
 
 import com.tencent.memory.model.Gallery;
+import com.tencent.memory.model.GalleryUsersAndCode;
 import com.tencent.memory.model.Order;
+import com.tencent.memory.model.User;
 import com.tencent.memory.util.Paging;
 
 import java.util.List;
@@ -18,6 +20,8 @@ public interface GalleryService {
     List<Gallery> searchMyGalleries(long uid, String query, Paging paging, Order order);
 
     int createGallery(Gallery gallery);
+
+    List<User> loadMembers(long galleryId);
 
     // 移除非删除
     int removeGallery(boolean keep, long uid, long galleryId);

@@ -35,6 +35,11 @@ public interface UserMapper {
     @Select("SELECT * FROM user limit #{size} offset #{start} order by id #{order}")
     List<User> getAll(@Param("start") int start, @Param("size") int size, @Param("order") String order);
 
+    @Select("SELECT * FROM user inner join user_gallery on user.id = user_gallery.uid " +
+            "where user_gallery.galleryId = #{galleryId} "+
+            "order by user_gallery.created asc ")
+    List<User> getGalleryAll(@Param("galleryId") long galleryId);
+
     // 修改名字
     @Update("UPDATE user SET  name = #{name} WHERE id = #{id}")
     int update(@Param("id") int uid, @Param("name") String name);
