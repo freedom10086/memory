@@ -1,5 +1,7 @@
 package com.tencent.memory.upload;
 
+import com.qcloud.image.ImageClient;
+import com.qcloud.image.request.PornDetectRequest;
 import com.tencent.memory.config.Config;
 import com.tencent.memory.config.UploadConfig;
 import com.tencent.memory.model.MyException;
@@ -112,5 +114,29 @@ public class CosStorageService implements UploadService {
     @Override
     public void deleteAll() {
         throw new MyException(HttpStatus.BAD_REQUEST, "not supported!");
+    }
+
+    // 腾讯云鉴黄
+    private void pornDetect(String image) {
+
+        String appId = String.valueOf(Config.appId);
+        String secretId = Config.secretId;
+        String secretKey = Config.secretKey;
+        ImageClient imageClient = new ImageClient(appId, secretId, secretKey);
+
+        String ret;
+        // 1. url方式
+        long start = System.currentTimeMillis();
+        String[] pornUrlList = new String[]{image};
+        pornUrlList[0] = image;
+        PornDetectRequest pornReq = new PornDetectRequest(Config.bucketName, pornUrlList);
+
+        ret = imageClient.pornDetect(pornReq);
+        logger.info("porn detect {} cost {}ms", image, (System.currentTimeMillis() - start));
+        logger.debug("porn detect result: {}", ret);
+        if (ret.contains("\"code\": 0")) {
+
+        }
+
     }
 }

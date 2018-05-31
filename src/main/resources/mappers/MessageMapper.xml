@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tencent.memory.dao.MessageMapper">
+    <resultMap id="messageMap" type="Message">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="uid" jdbcType="BIGINT" property="uid"/>
+        <result column="imageId" jdbcType="BIGINT" property="imageId"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="created" jdbcType="TIMESTAMP" property="created"/>
+
+        <association property="creater" resultMap="userMap"/>
+        <association property="image" resultMap="imageMap"/>
+    </resultMap>
+
+    <resultMap id="userMap" type="User">
+        <id column="user_id" jdbcType="BIGINT" property="id"/>
+        <result column="openId" jdbcType="VARCHAR" property="openId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="name"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="gender" jdbcType="VARCHAR" property="gender"/>
+        <result column="user_created" jdbcType="TIMESTAMP" property="created"/>
+    </resultMap>
+
+    <resultMap id="imageMap" type="Image">
+        <id column="image_id" jdbcType="BIGINT" property="id"/>
+        <result column="galleryId" jdbcType="BIGINT" property="galleryId"/>
+        <result column="groupId" jdbcType="BIGINT" property="groupId"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="likes" jdbcType="INTEGER" property="likes"/>
+        <result column="comments" jdbcType="INTEGER" property="comments"/>
+        <result column="image_created" jdbcType="TIMESTAMP" property="created"/>
+    </resultMap>
+</mapper>

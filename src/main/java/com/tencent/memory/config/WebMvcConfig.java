@@ -30,7 +30,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 "/images/*",
                 "/likes/*",
                 "/invite/",
-                "/invite/join");
+                "/invite/join",
+                "/messages/*");
         registration.setName("AuthFilter");
         registration.setOrder(1);
         return registration;
@@ -44,7 +45,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 "/galleries/*",
                 "/search/*",
                 "/comments/*",
-                "/images/*");
+                "/images/*",
+                "/messages/*");
         registration.setName("PagingFilter");
         registration.setOrder(2);
         return registration;

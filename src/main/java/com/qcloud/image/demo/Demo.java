@@ -4,9 +4,14 @@
  */
 package com.qcloud.image.demo;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONWrappedObject;
 import com.qcloud.image.ImageClient;
+import com.qcloud.image.PornDetectResultList;
 import com.qcloud.image.request.*;
 import com.tencent.memory.config.Config;
+import com.tencent.memory.util.Token;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -39,7 +44,7 @@ public class Demo {
         //鉴黄
         imagePorn(imageClient, bucketName);
         //图像内容
-        imageTag(imageClient, bucketName);
+        //imageTag(imageClient, bucketName);
 
         /*文字识别系列 ( OCR )*/
         /*
@@ -120,16 +125,25 @@ public class Demo {
     private static void imagePorn(ImageClient imageClient, String bucketName) {
         String ret;
         // 1. url方式
+        long start = System.currentTimeMillis();
         System.out.println("====================================================");
         String[] pornUrlList = new String[3];
         pornUrlList[0] = "http://youtu.qq.com/app/img/experience/porn/icon_porn04.jpg";
-        pornUrlList[1] = "http://youtu.qq.com/app/img/experience/porn/icon_porn05.jpg";
-        pornUrlList[2] = "http://youtu.qq.com/app/img/experience/porn/icon_porn06.jpg";
+        //pornUrlList[1] = "http://youtu.qq.com/app/img/experience/porn/icon_porn05.jpg";
+        //pornUrlList[2] = "http://youtu.qq.com/app/img/experience/porn/icon_porn06.jpg";
         PornDetectRequest pornReq = new PornDetectRequest(bucketName, pornUrlList);
 
         ret = imageClient.pornDetect(pornReq);
         System.out.println("porn detect ret:" + ret);
+        System.out.println("cost time:" + (System.currentTimeMillis() - start) + "ms");
 
+        try {
+            PornDetectResultList res = new ObjectMapper().readValue(ret, PornDetectResultList.class);
+            System.out.println(res.result_list.get(0).data.porn_score);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        /*
         //2. 图片内容方式
         System.out.println("====================================================");
         File[] pornImageList = new File[3];
@@ -139,6 +153,7 @@ public class Demo {
         pornReq = new PornDetectRequest(bucketName, pornImageList);
         ret = imageClient.pornDetect(pornReq);
         System.out.println("porn detect ret:" + ret);
+        */
     }
 
     /**

@@ -1,13 +1,15 @@
 package com.tencent.memory.model;
 
-public class Message {
+import java.time.LocalDateTime;
 
-    public int type; //0--comment 1--like
+public class Message {
+    public long id;
+    public long imageId;
+    public long uid;
+    public int type; //0--like 1--comment
+    public String content;
+    public LocalDateTime created;
 
     public Image image;
-
     public User creater;
-
-
-
 }

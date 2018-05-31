@@ -10,9 +10,11 @@ public class Config {
     public static final long HOUR = 3600;
     public static final long DAY = HOUR * 24;
 
+    //腾讯云
     public static final long appId = 10132346;
     public static final String secretId = "AKIDfQJ5xiZp7FBwY04MGzXv891jNp6Fwzb2";
     public static final String secretKey = "QfkmeLqCNNDuSp12xiIiU7ZszwjKjwzr";
+
     public static final String tokenSecretKey = "QfkmeLCNNDSp12iIiU7ZswjKjwzr";
     public static final String inviteSecreateKey = "jA8/}~-)n?'z#!`+jdha";
     public static final String bucketName = "image";

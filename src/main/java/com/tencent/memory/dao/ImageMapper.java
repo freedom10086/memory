@@ -10,6 +10,15 @@ import java.util.List;
 @Component
 public interface ImageMapper {
 
+    String IMAGE_COLUNM = "image.id as image_id, " +
+            "image.galleryId, " +
+            "image.groupId, " +
+            "image.url," +
+            "image.description," +
+            "image.likes," +
+            "image.comments," +
+            "image.created as image_created ";
+
     @Insert("INSERT INTO image(galleryId,groupId,url,creater,description) VALUES " +
             "(#{galleryId},#{groupId},#{url},#{creater.id},#{description})")
     @Options(useGeneratedKeys = true, keyProperty = "id")

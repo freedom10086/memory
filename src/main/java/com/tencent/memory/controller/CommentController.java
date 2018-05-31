@@ -4,7 +4,11 @@ import com.tencent.memory.config.Attrs;
 import com.tencent.memory.model.*;
 import com.tencent.memory.service.CommentService;
 import com.tencent.memory.service.ImageService;
+import com.tencent.memory.service.MessageService;
 import com.tencent.memory.util.Paging;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,12 +19,19 @@ import java.util.List;
 @RestController
 public class CommentController {
 
+    private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
+
     private final ImageService imageService;
     private final CommentService commentService;
+    private final MessageService messageService;
 
-    public CommentController(ImageService imageService, CommentService commentService) {
+    @Autowired
+    public CommentController(ImageService imageService,
+                             CommentService commentService,
+                             MessageService messageService) {
         this.imageService = imageService;
         this.commentService = commentService;
+        this.messageService = messageService;
     }
 
     // 查询评论列表
@@ -53,7 +64,18 @@ public class CommentController {
         comment.imageId = imageId;
         comment.created = LocalDateTime.now();
 
-        commentService.addComment(comment);
+        int i = commentService.addComment(comment);
+        if (i > 0) {
+            logger.debug("add comment success {} add message to user", comment.id);
+            Message message = new Message();
+            message.content = comment.content;
+            message.type = 1;
+            message.creater = comment.creater;
+            message.imageId = comment.imageId;
+
+            messageService.addMessage(message);
+            logger.debug("add message success id:{}", message.id);
+        }
 
         return new ApiResultBuilder<Comment>().success(comment).build();
     }
