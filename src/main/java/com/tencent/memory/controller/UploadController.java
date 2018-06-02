@@ -70,6 +70,7 @@ public class UploadController {
     @ResponseBody
     public ApiResult<UploadResult> handleRawFileUpload(InputStream inputStream) {
         long start = System.currentTimeMillis();
+
         UploadResult result = storageService.store(inputStream);
         logger.info("upload cost: {}ms", System.currentTimeMillis() - start);
         return new ApiResultBuilder<UploadResult>().success(result).build();

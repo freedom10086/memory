@@ -142,7 +142,7 @@ public class InviteController {
         }
 
 
-        return String.format(HTML, gallery.creater.name, gallery.name, inviteCode);
+        return String.format(HTML_1, gallery.creater.name, gallery.name, invitecode);
     }
 
     private final static String HTML = "<!DOCTYPE HTML>\n" +
@@ -155,6 +155,34 @@ public class InviteController {
             "<body>\n" +
             "<p> %s 邀请你加入相册%s 是否同意?</p>\n" +
             "<a href=\"memory://invite?invitecode=%s\">同意</a>\n" +
+            "</body>\n" +
+            "</html>";
+
+    public final static String HTML_1 = "<!DOCTYPE html>\n" +
+            "<html lang=\"en\">\n" +
+            "<head>\n" +
+            "    <meta charset=\"UTF-8\">\n" +
+            "    <title>相册邀请-印迹</title>\n" +
+            "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+            "    <style>\n" +
+            "        * {\n" +
+            "            margin: 0px;\n" +
+            "            padding: 0px;\n" +
+            "        }\n" +
+            "    </style>\n" +
+            "</head>\n" +
+            "<body style=\"overflow: hidden\">\n" +
+            "    <div style=\"position: absolute; top: 30px; width: 100%%\">\n" +
+            "        <div style=\"font-size: 3rem; text-align: center\">%s</div>\n" +
+            "    </div>\n" +
+            "    <div style=\"position: absolute; top: 21%%; width: 100%%\">\n" +
+            "        <div style=\"font-size: 2rem; text-align: center\">%s 同意?</div>\n" +
+            "    </div>\n" +
+            "\n" +
+            "    <img style=\"margin-bottom: 20px\" src=\"invite_img1.jpg\" width=\"100%%\">\n" +
+            "    <div style=\"margin-left: 10%%;margin-right: 10%%\">\n" +
+            "        <a href=\"memory://invite?invitecode=%s\"><img src=\"invite_img2.png\" width=\"100%%\"></a>\n" +
+            "    </div>\n" +
             "</body>\n" +
             "</html>";
 

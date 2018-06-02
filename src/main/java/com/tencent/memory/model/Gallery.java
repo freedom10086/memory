@@ -3,6 +3,7 @@ package com.tencent.memory.model;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.tencent.memory.config.Config;
 import com.tencent.memory.config.JsonDateSerializer;
+import com.tencent.memory.util.TextUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -31,6 +32,7 @@ public class Gallery {
 
     public String getCover() {
         if (cover == null) return null;
+        if (TextUtils.isEmpty(cover)) return null;
         return Config.bucketPathCdnPrefix + cover;
     }
 

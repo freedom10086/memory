@@ -37,7 +37,7 @@ public class ImageDao extends JdbcDaoSupport {
 
         String sql = "insert into image_group(galleryId,creater,description) values(?,?,?)";
         String sql2 = "insert into image(galleryId,groupId,description,url,creater) values(?,?,?,?,?)";
-        String sql3 = "update gallery set cover = ? where id = ?";
+        String sql3 = "update gallery set cover = ? where id = ? and cover = ''";
 
         PreparedStatement pst = null;
         ResultSet rs = null;

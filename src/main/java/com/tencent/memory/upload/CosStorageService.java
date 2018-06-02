@@ -67,9 +67,15 @@ public class CosStorageService implements UploadService {
         try {
             data = FileCopyUtils.copyToByteArray(inputStream);
             size = data.length;
+            logger.info("new upload file size {}", size);
         } catch (IOException e) {
             throw new MyException(HttpStatus.BAD_REQUEST, "can not read file byte!");
         }
+
+        if (size ==0) {
+            throw new MyException(HttpStatus.BAD_REQUEST, "image size is zero!");
+        }
+
         return getUploadResult(size, contentType, data);
     }
 

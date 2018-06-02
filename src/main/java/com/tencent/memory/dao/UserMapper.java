@@ -42,7 +42,7 @@ public interface UserMapper {
 
     // 修改名字
     @Update("UPDATE user SET  name = #{name} WHERE id = #{id}")
-    int update(@Param("id") int uid, @Param("name") String name);
+    int update(@Param("id") long uid, @Param("name") String name);
 
 
     // 删除用户

@@ -29,14 +29,24 @@ public class GalleryController {
                                          @RequestParam("description") String description,
                                          @RequestParam("type") int type) {
         Long uid = (Long) req.getAttribute(Attrs.uid);
-
         Gallery gallery = new Gallery();
         gallery.name = name;
+        if (name.length() > 20) {
+            return new ApiResultBuilder<Gallery>()
+                    .error(HttpStatus.BAD_REQUEST.value(),"相册名称长度不能超过20")
+                    .build();
+        }
         gallery.description = description;
+        if (description.length() > 100) {
+            return new ApiResultBuilder<Gallery>()
+                    .error(HttpStatus.BAD_REQUEST.value(),"相册描述长度不能超过100")
+                    .build();
+        }
         gallery.creater = new User();
         gallery.creater.id = uid;
         gallery.type = type;
         gallery.created = LocalDateTime.now();
+        gallery.updated = LocalDateTime.now();
         galleryService.createGallery(gallery);
         gallery.creater = null;
 

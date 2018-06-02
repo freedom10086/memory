@@ -16,6 +16,6 @@ public interface UserGalleryMapper {
     int setGalleryDel(@Param("uid") long uid, @Param("galleryId") long galleryId);
 
     //真正的删除
-    @Delete("delete from gallery where uid = #{uid} and galleryId = #{galleryId}")
+    @Delete("delete from user_gallery where uid = #{uid} and galleryId = #{galleryId}")
     int removeGallery(@Param("uid") long uid, @Param("galleryId") long galleryId);
 }

@@ -23,7 +23,7 @@ public class Config {
     public static final String uploadPrefix = "image/";
     public static final String bucketPathPrefix = "https://" + bucketNameWithId + ".cosgz.myqcloud.com/" + uploadPrefix;
     public static final String bucketPathCdnPrefix = "https://" + bucketNameWithId + ".file.myqcloud.com/" + uploadPrefix;
-
+    //https://image-1251023989.file.myqcloud.com/image/
 
     public static final String qqAndroidAppId = "1106924490";
     public static final String qqAndroidAppKey = "x7eg1wJDzGOifzo6";

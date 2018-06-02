@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.tencent.memory.config.Config;
 import com.tencent.memory.config.JsonDateSerializer;
+import com.tencent.memory.util.TextUtils;
 
 import java.time.LocalDateTime;
 
@@ -32,6 +33,7 @@ public class Image {
     }
 
     public String getUrl() {
+        if (TextUtils.isEmpty(url)) return null;
         return Config.bucketPathCdnPrefix + url;
     }
 }

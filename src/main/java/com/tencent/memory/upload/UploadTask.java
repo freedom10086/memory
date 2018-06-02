@@ -57,6 +57,7 @@ public class UploadTask implements Callable<UploadResult> {
             } else if (size >= 1310720) { // 1.25M
                 quality = 0.98;
             }
+
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             try {
                 Thumbnails.of(new ByteArrayInputStream(data))
@@ -67,10 +68,10 @@ public class UploadTask implements Callable<UploadResult> {
                 throw new MyException(HttpStatus.BAD_REQUEST, "unsupported image file");
             }
             data = outputStream.toByteArray();
-            logger.info("scale image from {} to {}", size, data.length);
-            size = data.length;
         }
 
+        size = data.length;
+        logger.info("upload image size {}", size);
         InputStream inputStream = new ByteArrayInputStream(data);
         LocalDateTime dateTime = LocalDateTime.now();
         String destDir = Config.uploadPrefix + dateTime.getYear() + "/" + dateTime.getMonthValue() + "/" + dateTime.getDayOfMonth() + "/";

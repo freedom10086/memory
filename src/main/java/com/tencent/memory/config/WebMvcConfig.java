@@ -31,7 +31,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 "/likes/*",
                 "/invite/",
                 "/invite/join",
-                "/messages/*");
+                "/messages/*",
+                "/users/*");
         registration.setName("AuthFilter");
         registration.setOrder(1);
         return registration;
