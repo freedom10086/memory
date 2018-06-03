@@ -37,8 +37,8 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public List<ImageGroup> getImageGroupsFromGallery(long galleryId, Paging paging) {
-        List<Image> images = imageMapper.getGroupsByGallery(galleryId, paging.start, paging.size, Order.DESC.value);
+    public List<ImageGroup> getImageGroupsFromGallery(long galleryId, long uid, Paging paging) {
+        List<Image> images = imageMapper.getGroupsByGallery(galleryId, uid, paging.start, paging.size, Order.DESC.value);
         //代码分组
         List<ImageGroup> imageGroups = new ArrayList<>();
         getImagesGroups(images, imageGroups);
@@ -72,8 +72,8 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public List<Image> getAllByGallery(long galleryId, Paging paging) {
-        return imageMapper.getAllByGallery(galleryId, paging.start, paging.size, Order.DESC.value);
+    public List<Image> getAllByGallery(long galleryId, long uid, Paging paging) {
+        return imageMapper.getAllByGallery(galleryId, uid, paging.start, paging.size, Order.DESC.value);
     }
 
 

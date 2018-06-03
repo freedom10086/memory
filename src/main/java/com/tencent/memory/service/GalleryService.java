@@ -11,15 +11,17 @@ import java.util.List;
 public interface GalleryService {
 
     //imageSize 图片数目
-    Gallery loadGallery(long galleryId, Paging paging);
+    Gallery loadGallery(long galleryId, long uid, Paging paging);
 
-    Gallery loadGalleryWithoutImage(long galleryId);
+    Gallery loadGalleryWithoutImage(long galleryId, long uid);
 
     List<Gallery> loadMyGalleries(long uid, Paging paging, Order order);
 
     List<Gallery> searchMyGalleries(long uid, String query, Paging paging, Order order);
 
     int createGallery(Gallery gallery);
+
+    int updateGallery(Gallery gallery);
 
     List<User> loadMembers(long galleryId);
 

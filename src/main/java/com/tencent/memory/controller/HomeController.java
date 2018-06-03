@@ -5,6 +5,7 @@ import com.tencent.memory.config.Config;
 import com.tencent.memory.model.InviteCode;
 import com.tencent.memory.util.Sign;
 import com.tencent.memory.util.Token;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,9 +26,9 @@ public class HomeController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/gen_token")
-    public String token() {
-        Token token = new Token(1, Token.day);
+    @RequestMapping(value = "/gen_token/{uid}")
+    public String token(@PathVariable("uid") long uid) {
+        Token token = new Token(uid, Token.day);
         return token.genToken(Config.tokenSecretKey);
     }
 

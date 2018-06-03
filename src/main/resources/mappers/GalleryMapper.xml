@@ -12,6 +12,7 @@
         <result column="users" jdbcType="INTEGER" property="users"/>
         <result column="created" jdbcType="TIMESTAMP" property="created"/>
         <result column="updated" jdbcType="TIMESTAMP" property="updated"/>
+        <result column="exited" jdbcType="TIMESTAMP" property="exited"/>
         <association column="creater" property="creater" resultMap="userMap"/>
     </resultMap>
 

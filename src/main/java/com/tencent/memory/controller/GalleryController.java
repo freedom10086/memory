@@ -33,13 +33,13 @@ public class GalleryController {
         gallery.name = name;
         if (name.length() > 20) {
             return new ApiResultBuilder<Gallery>()
-                    .error(HttpStatus.BAD_REQUEST.value(),"相册名称长度不能超过20")
+                    .error(HttpStatus.BAD_REQUEST.value(), "相册名称长度不能超过20")
                     .build();
         }
         gallery.description = description;
         if (description.length() > 100) {
             return new ApiResultBuilder<Gallery>()
-                    .error(HttpStatus.BAD_REQUEST.value(),"相册描述长度不能超过100")
+                    .error(HttpStatus.BAD_REQUEST.value(), "相册描述长度不能超过100")
                     .build();
         }
         gallery.creater = new User();
@@ -53,6 +53,27 @@ public class GalleryController {
         return new ApiResultBuilder<Gallery>().success(gallery).build();
     }
 
+    @PutMapping("/galleries/{galleryId}")
+    public ApiResult<Gallery> editGallery(HttpServletRequest req,
+                                          @PathVariable("galleryId") long galleryId,
+                                          @RequestParam("name") String name,
+                                          @RequestParam("description") String description,
+                                          @RequestParam("type") int type) {
+        Long uid = (Long) req.getAttribute(Attrs.uid);
+        Gallery gallery = galleryService.loadGalleryWithoutImage(galleryId, uid);
+        if (gallery.creater.id != uid) {
+            return new ApiResultBuilder<Gallery>()
+                    .error(HttpStatus.FORBIDDEN.value(), "你无权修改不是你创建的相册")
+                    .build();
+        }
+        gallery.name = name;
+        gallery.description = description;
+        gallery.type = type;
+
+        int i = galleryService.updateGallery(gallery);
+        return new ApiResultBuilder<Gallery>().success(gallery).build();
+    }
+
 
     // 查询相册成员 和 生成邀请码
     @GetMapping("/galleries/{galleryId}/members/")
@@ -61,8 +82,8 @@ public class GalleryController {
         Long uid = (Long) req.getAttribute(Attrs.uid);
         GalleryUsersAndCode res = new GalleryUsersAndCode();
 
-        Gallery gallery = galleryService.loadGalleryWithoutImage(galleryId);
-        if(gallery == null ) {
+        Gallery gallery = galleryService.loadGalleryWithoutImage(galleryId, 0);
+        if (gallery == null) {
             return new ApiResultBuilder<GalleryUsersAndCode>()
                     .error(HttpStatus.BAD_REQUEST.value(), "相册不存在:" + galleryId).build();
         }
@@ -102,8 +123,9 @@ public class GalleryController {
     @GetMapping("/galleries/{galleryId}")
     public ApiResult<Gallery> getGallery(HttpServletRequest req,
                                          @PathVariable("galleryId") long galleryId) {
+        Long uid = (Long) req.getAttribute(Attrs.uid);
         Paging paging = (Paging) req.getAttribute(Attrs.paging);
-        Gallery gallery = galleryService.loadGallery(galleryId, paging);
+        Gallery gallery = galleryService.loadGallery(galleryId, uid, paging);
         if (gallery == null) {
             return new ApiResultBuilder<Gallery>()
                     .error(HttpStatus.NOT_MODIFIED.value(), "相册不存在:" + galleryId).build();

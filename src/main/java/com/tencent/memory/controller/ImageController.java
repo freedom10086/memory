@@ -38,8 +38,9 @@ public class ImageController {
     @GetMapping("/galleries/{galleryId}/image-groups/")
     public ApiResult<List<ImageGroup>> getImageGroupsFromGallery(ServletRequest req,
                                                                  @PathVariable("galleryId") long galleryId) {
+        Long uid = (Long) req.getAttribute(Attrs.uid);
         Paging paging = (Paging) req.getAttribute(Attrs.paging);
-        List<ImageGroup> res = imageService.getImageGroupsFromGallery(galleryId, paging);
+        List<ImageGroup> res = imageService.getImageGroupsFromGallery(galleryId, uid, paging);
         return new ApiResultBuilder<List<ImageGroup>>().success(res).build();
     }
 
@@ -68,6 +69,7 @@ public class ImageController {
     }
 
     // 按列表查询某个相册里的所有图片
+    // 列表视图
     @GetMapping("/galleries/{galleryId}/images/")
     public ApiResult<List<Image>> getAllByGallery(ServletRequest req,
                                                   @PathVariable("galleryId") long galleryId) {
@@ -75,7 +77,7 @@ public class ImageController {
         Long uid = (Long) req.getAttribute(Attrs.uid);
 
         return new ApiResultBuilder<List<Image>>()
-                .success(imageService.getAllByGallery(galleryId, paging)).build();
+                .success(imageService.getAllByGallery(galleryId, uid, paging)).build();
     }
 
     // 给相册添加图片

@@ -7,6 +7,9 @@ public class ApiResultBuilder<T> {
     private ApiResult<T> result;
 
 
+    public  ApiResultBuilder() {
+    }
+
     public ApiResultBuilder<T> success(T data) {
         checkNull();
         result.status = HttpStatus.OK.value();

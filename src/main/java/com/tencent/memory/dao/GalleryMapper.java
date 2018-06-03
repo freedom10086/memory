@@ -24,8 +24,17 @@ public interface GalleryMapper {
         // 引用XML里配置的映射器
     Gallery findById(@Param("id") long id);
 
+    @Select("SELECT gallery.*, user_gallery.exited, " + UserMapper.USER_COLUNM +
+            "FROM gallery " +
+            "inner join user on user.id = gallery.creater " +
+            "left join user_gallery on user_gallery.galleryId = gallery.id and user_gallery.uid = #{uid} " +
+            "WHERE gallery.id = #{id}")
+    @ResultMap("com.tencent.memory.dao.GalleryMapper.galleryMap")
+        // 引用XML里配置的映射器
+    Gallery findByIdWithExited(@Param("id") long id, @Param("uid") long uid);
+
     // 搜索我的所有相册
-    @Select("SELECT gallery.*," + UserMapper.USER_COLUNM + " FROM gallery " +
+    @Select("SELECT gallery.*, user_gallery.exited, " + UserMapper.USER_COLUNM + " FROM gallery " +
             "inner join user on user.id = gallery.creater " +
             "inner join user_gallery on user_gallery.galleryId = gallery.id " +
             "where gallery.id in (select user_gallery.galleryId from user_gallery where user_gallery.uid = #{uid}) " +
@@ -39,7 +48,7 @@ public interface GalleryMapper {
 
 
     // 获取我的所有相册
-    @Select("SELECT gallery.*, " + UserMapper.USER_COLUNM + " FROM gallery " +
+    @Select("SELECT gallery.*, user_gallery.exited, " + UserMapper.USER_COLUNM + " FROM gallery " +
             "inner join user on user.id = gallery.creater " +
             "inner join user_gallery on user_gallery.galleryId = gallery.id " +
             "where gallery.id in (select user_gallery.galleryId from user_gallery where user_gallery.uid = #{uid}) " +

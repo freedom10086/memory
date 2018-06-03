@@ -32,7 +32,7 @@ public class InviteController {
                                            @RequestParam("galleryId") long galleryId) {
 
         Long uid = (Long) req.getAttribute(Attrs.uid);
-        Gallery gallery = galleryService.loadGalleryWithoutImage(galleryId);
+        Gallery gallery = galleryService.loadGalleryWithoutImage(galleryId, 0);
         if (gallery == null) {
             return new ApiResultBuilder<String>()
                     .error(HttpStatus.BAD_REQUEST.value(), "相册不存在,id:" + galleryId).build();
@@ -68,7 +68,7 @@ public class InviteController {
                     "邀请码已过期").build();
         }
 
-        Gallery gallery = galleryService.loadGalleryWithoutImage(inviteCode.galleryId);
+        Gallery gallery = galleryService.loadGalleryWithoutImage(inviteCode.galleryId, 0);
         if (gallery == null) {
             return new ApiResultBuilder<Gallery>()
                     .error(HttpStatus.BAD_REQUEST.value(), "相册不存在,id:" + inviteCode.galleryId).build();
@@ -98,7 +98,7 @@ public class InviteController {
                     "邀请码已过期").build();
         }
 
-        Gallery gallery = galleryService.loadGalleryWithoutImage(inviteCode.galleryId);
+        Gallery gallery = galleryService.loadGalleryWithoutImage(inviteCode.galleryId, 0);
         if (gallery == null) {
             return new ApiResultBuilder<Gallery>()
                     .error(HttpStatus.BAD_REQUEST.value(), "相册不存在,id:" + inviteCode.galleryId).build();
@@ -136,7 +136,7 @@ public class InviteController {
             return String.format(ERR_HTML, "邀请链接已过期");
         }
 
-        Gallery gallery = galleryService.loadGalleryWithoutImage(inviteCode.galleryId);
+        Gallery gallery = galleryService.loadGalleryWithoutImage(inviteCode.galleryId, 0);
         if (gallery == null) {
             return String.format(ERR_HTML, "相册不存在,id:" + inviteCode.galleryId);
         }

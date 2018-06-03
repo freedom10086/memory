@@ -45,6 +45,12 @@ public class GalleryServiceImpl implements GalleryService {
     }
 
     @Override
+    public int updateGallery(Gallery gallery) {
+
+        return galleryMapper.update(gallery);
+    }
+
+    @Override
     public List<User> loadMembers(long galleryId) {
         return userMapper.getGalleryAll(galleryId);
     }
@@ -52,10 +58,10 @@ public class GalleryServiceImpl implements GalleryService {
     // 数据库分页
     // 代码分组
     @Override
-    public Gallery loadGallery(long galleryId, Paging paging) {
-        Gallery gallery = galleryMapper.findById(galleryId);
+    public Gallery loadGallery(long galleryId, long uid, Paging paging) {
+        Gallery gallery = galleryMapper.findByIdWithExited(galleryId, uid);
         if (gallery != null) {
-            List<Image> images = imageMapper.getGroupsByGallery(galleryId, paging.start, paging.size, Order.DESC.value);
+            List<Image> images = imageMapper.getGroupsByGallery(galleryId, uid, paging.start, paging.size, Order.DESC.value);
             //List<Image> images = imageMapper.getAllByGallery(galleryId, Order.DESC.value);
             //代码分组
             List<ImageGroup> imageGroups = new ArrayList<>();
@@ -76,15 +82,20 @@ public class GalleryServiceImpl implements GalleryService {
     }
 
     @Override
-    public Gallery loadGalleryWithoutImage(long galleryId) {
-        return galleryMapper.findById(galleryId);
+    public Gallery loadGalleryWithoutImage(long galleryId, long uid) {
+        Gallery gallery;
+        if (uid <= 0) {
+            gallery = galleryMapper.findById(galleryId);
+        } else {
+            gallery = galleryMapper.findByIdWithExited(galleryId, uid);
+        }
+        return gallery;
     }
 
     @Override
     public List<Gallery> loadMyGalleries(long uid, Paging paging, Order order) {
-        List<Gallery> galleries = galleryMapper.getAllByCreated(uid, paging.start, paging.size, order.value);
 
-        return galleries;
+        return galleryMapper.getAllByCreated(uid, paging.start, paging.size, order.value);
     }
 
     @Override

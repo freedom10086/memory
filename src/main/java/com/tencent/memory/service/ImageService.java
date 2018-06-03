@@ -13,11 +13,11 @@ public interface ImageService {
 
     boolean isExist(long imageId);
 
-    List<ImageGroup> getImageGroupsFromGallery(long galleryId, Paging paging);
+    List<ImageGroup> getImageGroupsFromGallery(long galleryId, long uid, Paging paging);
 
     List<ImageGroup> getNewsImageGroups(long uid, Paging paging);
 
-    List<Image> getAllByGallery(long galleryId, Paging paging);
+    List<Image> getAllByGallery(long galleryId, long uid, Paging paging);
 
     // 创建group 再把这些图片插入
     int addImagesToGallery(long galleryId, long uid, UploadRequest[] images, String description);
