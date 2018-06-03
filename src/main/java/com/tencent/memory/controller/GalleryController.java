@@ -53,6 +53,7 @@ public class GalleryController {
         return new ApiResultBuilder<Gallery>().success(gallery).build();
     }
 
+    // 修改相册
     @PutMapping("/galleries/{galleryId}")
     public ApiResult<Gallery> editGallery(HttpServletRequest req,
                                           @PathVariable("galleryId") long galleryId,
