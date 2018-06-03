@@ -1,7 +1,11 @@
 package com.tencent.memory.upload;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qcloud.image.ImageClient;
+import com.qcloud.image.PornDetectData;
+import com.qcloud.image.PornDetectResultList;
 import com.qcloud.image.request.PornDetectRequest;
+import com.qcloud.image.request.TagDetectRequest;
 import com.tencent.memory.config.Config;
 import com.tencent.memory.config.UploadConfig;
 import com.tencent.memory.model.MyException;
@@ -72,7 +76,7 @@ public class CosStorageService implements UploadService {
             throw new MyException(HttpStatus.BAD_REQUEST, "can not read file byte!");
         }
 
-        if (size ==0) {
+        if (size == 0) {
             throw new MyException(HttpStatus.BAD_REQUEST, "image size is zero!");
         }
 
@@ -92,7 +96,33 @@ public class CosStorageService implements UploadService {
                 properties.getMaxThumbnailWidth(), properties.getMaxThumbnailHeight()));
         try {
             UploadResult s = f.get();
+            // 鉴黄
+            ImageClient imageClient = new ImageClient(String.valueOf(Config.appId),
+                    Config.secretId, Config.secretKey);
+            PornDetectRequest pornReq = new PornDetectRequest(Config.bucketName, new String[]{s.url});
+            String ret = imageClient.pornDetect(pornReq);
+            try {
+                PornDetectResultList res = new ObjectMapper().readValue(ret, PornDetectResultList.class);
+                if (res != null && res.result_list != null && res.result_list.size() == 1) {
+                    if (res.result_list.get(0).code == 0) {
+                        PornDetectData pornDetectData = res.result_list.get(0).data;
+                        if (pornDetectData.result == 1) {
+                            throw new MyException(HttpStatus.BAD_REQUEST, "图片涉及色情请重新选择");
+                        } else if (pornDetectData.result == 2) {
+                            logger.warn("image maybe porn {} confidence", res.result_list.get(0).url,
+                                    res.result_list.get(0).data.confidence);
+                        }
+                        // ok image is ok
+                    } else {
+                        logger.warn("porn detect error {}", res.result_list.get(0).message);
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             if (ft != null) {
+                // 等待上传缩略图完成，如果已完成立即返回
                 s = ft.get();
             }
 
