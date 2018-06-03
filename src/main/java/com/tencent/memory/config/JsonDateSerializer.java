@@ -67,10 +67,6 @@ public class JsonDateSerializer extends JsonSerializer<LocalDateTime> {
          * <code>3小时之前</code>
          * <code>现在</code>
          * </pre>
-         *
-         * @param showTime
-         *            是否显示时间
-         * @return 格式化后的时间字符串
          */
         public String toFriendlyDate(boolean showTime) {
             try {
@@ -133,10 +129,6 @@ public class JsonDateSerializer extends JsonSerializer<LocalDateTime> {
 
         /**
          * 格式化时间
-         *
-         * @param pattern
-         *            格式化表达式
-         * @return 格式化后时间字符串
          */
         private String format(String pattern) {
             return new SimpleDateFormat(pattern).format(this);

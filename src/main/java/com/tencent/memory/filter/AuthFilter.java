@@ -25,7 +25,6 @@ public class AuthFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        logger.info("do filter");
         String token = servletRequest.getParameter(Attrs.token);
         if (token == null || token.length() == 0) {
             unAuth(servletResponse, "需要token参数");
@@ -44,6 +43,7 @@ public class AuthFilter implements Filter {
             }
 
             servletRequest.setAttribute(Attrs.uid, t.uid);
+            logger.info("success to auth uid is:{}", t.uid);
             filterChain.doFilter(servletRequest, servletResponse);
         }
     }

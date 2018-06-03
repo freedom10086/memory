@@ -25,7 +25,6 @@ public class PagingFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        logger.info("do filter");
         if (servletRequest instanceof HttpServletRequest) {
             try {
                 Paging paging = Paging.parse((HttpServletRequest) servletRequest);

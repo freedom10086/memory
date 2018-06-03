@@ -94,7 +94,6 @@ public class GalleryServiceImpl implements GalleryService {
 
     @Override
     public List<Gallery> loadMyGalleries(long uid, Paging paging, Order order) {
-
         return galleryMapper.getAllByCreated(uid, paging.start, paging.size, order.value);
     }
 

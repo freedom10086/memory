@@ -17,12 +17,17 @@ public class UploadConfig {
     private boolean enableThumbnail;
 
     /**
-     *  需要生成缩略图的界限
+     * 是否允许鉴黄
+     */
+    private boolean enablePornDetect;
+
+    /**
+     * 需要生成缩略图的界限
      */
     private long thumbnailLimitSize;
 
     /**
-     *  缩略图大小
+     * 缩略图大小
      */
     private int maxThumbnailWidth;
     private int maxThumbnailHeight;
@@ -65,5 +70,13 @@ public class UploadConfig {
 
     public void setMaxThumbnailHeight(int maxThumbnailHeight) {
         this.maxThumbnailHeight = maxThumbnailHeight;
+    }
+
+    public boolean isEnablePornDetect() {
+        return enablePornDetect;
+    }
+
+    public void setEnablePornDetect(boolean enablePornDetect) {
+        this.enablePornDetect = enablePornDetect;
     }
 }

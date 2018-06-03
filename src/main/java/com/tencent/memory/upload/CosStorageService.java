@@ -5,7 +5,6 @@ import com.qcloud.image.ImageClient;
 import com.qcloud.image.PornDetectData;
 import com.qcloud.image.PornDetectResultList;
 import com.qcloud.image.request.PornDetectRequest;
-import com.qcloud.image.request.TagDetectRequest;
 import com.tencent.memory.config.Config;
 import com.tencent.memory.config.UploadConfig;
 import com.tencent.memory.model.MyException;
@@ -84,9 +83,9 @@ public class CosStorageService implements UploadService {
     }
 
     private UploadResult getUploadResult(long size, String contentType, byte[] data) {
-        // 上传缩略图
         Future<UploadResult> ft = null;
         if (properties.isEnableThumbnail() && size > properties.getThumbnailLimitSize()) {
+            // 上传缩略图
             ft = executor.submit(new UploadTask(data, contentType, true,
                     properties.getMaxThumbnailWidth(), properties.getMaxThumbnailHeight()));
         }
@@ -96,30 +95,12 @@ public class CosStorageService implements UploadService {
                 properties.getMaxThumbnailWidth(), properties.getMaxThumbnailHeight()));
         try {
             UploadResult s = f.get();
-            // 鉴黄
-            ImageClient imageClient = new ImageClient(String.valueOf(Config.appId),
-                    Config.secretId, Config.secretKey);
-            PornDetectRequest pornReq = new PornDetectRequest(Config.bucketName, new String[]{s.url});
-            String ret = imageClient.pornDetect(pornReq);
-            try {
-                PornDetectResultList res = new ObjectMapper().readValue(ret, PornDetectResultList.class);
-                if (res != null && res.result_list != null && res.result_list.size() == 1) {
-                    if (res.result_list.get(0).code == 0) {
-                        PornDetectData pornDetectData = res.result_list.get(0).data;
-                        if (pornDetectData.result == 1) {
-                            throw new MyException(HttpStatus.BAD_REQUEST, "图片涉及色情请重新选择");
-                        } else if (pornDetectData.result == 2) {
-                            logger.warn("image maybe porn {} confidence", res.result_list.get(0).url,
-                                    res.result_list.get(0).data.confidence);
-                        }
-                        // ok image is ok
-                    } else {
-                        logger.warn("porn detect error {}", res.result_list.get(0).message);
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+
+            if (properties.isEnablePornDetect()) {
+                // 鉴黄
+                pornDetect(s.url);
             }
+
 
             if (ft != null) {
                 // 等待上传缩略图完成，如果已完成立即返回
@@ -160,19 +141,29 @@ public class CosStorageService implements UploadService {
         String secretKey = Config.secretKey;
         ImageClient imageClient = new ImageClient(appId, secretId, secretKey);
 
-        String ret;
-        // 1. url方式
-        long start = System.currentTimeMillis();
         String[] pornUrlList = new String[]{image};
         pornUrlList[0] = image;
         PornDetectRequest pornReq = new PornDetectRequest(Config.bucketName, pornUrlList);
+        String ret = imageClient.pornDetect(pornReq);
 
-        ret = imageClient.pornDetect(pornReq);
-        logger.info("porn detect {} cost {}ms", image, (System.currentTimeMillis() - start));
-        logger.debug("porn detect result: {}", ret);
-        if (ret.contains("\"code\": 0")) {
-
+        try {
+            PornDetectResultList res = new ObjectMapper().readValue(ret, PornDetectResultList.class);
+            if (res != null && res.result_list != null && res.result_list.size() == 1) {
+                if (res.result_list.get(0).code == 0) {
+                    PornDetectData pornDetectData = res.result_list.get(0).data;
+                    if (pornDetectData.result == 1) {
+                        throw new MyException(HttpStatus.BAD_REQUEST, "图片涉及色情请重新选择");
+                    } else if (pornDetectData.result == 2) {
+                        logger.warn("image maybe porn {} confidence", res.result_list.get(0).url,
+                                res.result_list.get(0).data.confidence);
+                    }
+                    // ok image is ok
+                } else {
+                    logger.warn("porn detect error {}", res.result_list.get(0).message);
+                }
+            }
+        } catch (IOException e) {
+            logger.warn("porn detect err {}", e.getMessage());
         }
-
     }
 }
