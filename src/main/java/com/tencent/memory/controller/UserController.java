@@ -2,8 +2,8 @@ package com.tencent.memory.controller;
 
 
 import com.tencent.memory.config.Attrs;
-import com.tencent.memory.model.ApiResult;
-import com.tencent.memory.model.ApiResultBuilder;
+import com.tencent.memory.api.ApiResult;
+import com.tencent.memory.api.ApiResultBuilder;
 import com.tencent.memory.service.UserService;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;

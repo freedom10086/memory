@@ -1,7 +1,8 @@
-package com.tencent.memory.model;
+package com.tencent.memory.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tencent.memory.model.MyException;
 import org.springframework.http.HttpStatus;
 
 public class ApiResult<T> {

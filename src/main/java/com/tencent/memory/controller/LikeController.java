@@ -1,8 +1,8 @@
 package com.tencent.memory.controller;
 
 import com.tencent.memory.config.Attrs;
-import com.tencent.memory.model.ApiResult;
-import com.tencent.memory.model.ApiResultBuilder;
+import com.tencent.memory.api.ApiResult;
+import com.tencent.memory.api.ApiResultBuilder;
 import com.tencent.memory.model.Message;
 import com.tencent.memory.model.User;
 import com.tencent.memory.service.ImageService;

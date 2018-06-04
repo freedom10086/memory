@@ -1,7 +1,7 @@
 package com.tencent.memory.controller;
 
-import com.tencent.memory.model.ApiResult;
-import com.tencent.memory.model.ApiResultBuilder;
+import com.tencent.memory.api.ApiResult;
+import com.tencent.memory.api.ApiResultBuilder;
 import com.tencent.memory.model.UploadResult;
 import com.tencent.memory.service.UploadService;
 import com.tencent.memory.upload.StorageFileNotFoundException;

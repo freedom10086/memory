@@ -1,6 +1,8 @@
 package com.tencent.memory.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tencent.memory.api.ApiResult;
+import com.tencent.memory.api.ApiResultBuilder;
 import com.tencent.memory.config.Config;
 import com.tencent.memory.dao.UserMapper;
 import com.tencent.memory.model.*;

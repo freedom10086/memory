@@ -1,8 +1,8 @@
 package com.tencent.memory.filter;
 
 import com.tencent.memory.config.Attrs;
-import com.tencent.memory.model.ApiResult;
-import com.tencent.memory.model.ApiResultBuilder;
+import com.tencent.memory.api.ApiResult;
+import com.tencent.memory.api.ApiResultBuilder;
 import com.tencent.memory.model.MyException;
 import com.tencent.memory.util.Paging;
 import org.slf4j.Logger;

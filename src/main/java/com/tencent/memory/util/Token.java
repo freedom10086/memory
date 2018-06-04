@@ -25,7 +25,7 @@ public class Token {
     public static final long day = hour * 24;
 
     @JsonProperty("u")
-    public long uid; //用户id //当authority = 5时此为项目id
+    public long uid; //用户id
     @JsonProperty("s")
     public String salt; //盐
     @JsonProperty("e")

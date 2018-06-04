@@ -1,4 +1,4 @@
-package com.tencent.memory.model;
+package com.tencent.memory.api;
 
 import org.springframework.http.HttpStatus;
 
