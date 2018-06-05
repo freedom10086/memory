@@ -1,6 +1,4 @@
-2482069646
-
-
+## 服务器配置
 nano /etc/profile
 
 JAVA_HOME=/usr/local/java/jdk-10.0.1
@@ -11,22 +9,18 @@ export JAVA_HOME JRE_HOME CLASS_PATH PATH
 
 source /etc/profile
 
+
+## 服务器列表
 Db    内网 10.66.182.154
 gpu1  外网 203.195.129.198 内网 10.135.57.131
-cvm1  外网 111.230.70.47 内网 10.104.21.187 密码 just2351386755
+cvm1  外网 111.230.70.47 内网 10.104.21.187
 cvm2  外网 203.195.191.173  内网 10.104.223.47
 cvm3  外网 203.195.242.210 内网 	10.135.186.247
 
 clb1  外网 193.112.231.198
-redis 内网 10.66.240.6:6379 just2351386755
-redis-cli -h 10.66.240.6 -a just2351386755
+redis 内网 10.66.240.6:6379
 
-
-sudo yum install epel-release
-sudo yum install nginx
-sudo systemctl start nginx
-
-
+## 部署到服务器
 scp -P 36000 /Users/yang/Desktop/memory/target/memory-0.0.1-SNAPSHOT.jar  root@203.195.191.173:~
 ssh root@203.195.191.173 -p 36000
 
