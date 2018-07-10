@@ -6,3 +6,27 @@ jdk:
 install: mvn install -DskipTests=true -Dmaven.javadoc.skip=true
 
 script: mvn package -Dmaven.test.skip=true
+
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "ntOYOXfOA1VMbbtjcIyTm/rStsPJN11giSCovU2CW0lepnoE+AspVsFuNtFCODWxHwuZwJrUenzSRRi/fDYDPhVmLZ05h3nUYYs3a9u3804Wh0rJRl03RNe81pnGFLvBFlTJPAYmXVhRrQsAULX7jWgmS5Rcdpjw3FhAKRR+0Yf6uw5qIW7kPtmgBNacoidAF4GqQt3k9DeLPKQYjqmSeAJq+JXYM99uulz95bTzMAeB3jYX3BJc+b/47yHpJ/uqmrsFvxtKkDY3faFw994OCeE1z4yod2oNnuxRFRJNZHxMzH3E/CcYKghGaGW+kCntCSiUII4jjG6ksTEUUDyXsNqgaIlxV3tLFqmueSgIngv71g7txjfKHc3TxkZ5giIoTXf4JsyZkludYCSIm5kmvcvXh3cQrrnbdqfTc9VcPduLA9k8XmE3ZC3+/hL6E6ajcko7LY/wWygFsTezIJ8JakwREH4mJxrryqGDmeb95sXwKsHHFwyiJyDdk2ZZL3G5k4F23x7kn6uvcmEHLcbKYPjZb+3PvN5rsk0qoMB7jdBiy71fOiyQcN5gUqTXrquIq6EFG1MY5WWB3SkJ16NibCrlYF9SagoTLOPfwUBGC/+7gRvc+q7MCXy32xIj+SAEqsnkFeVobbNfCe1sbsTGKI9+ckLo0riqvw61PPUdR+8="
+
+before_install:
+  - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
+addons:
+  coverity_scan:
+    project:
+      name: "freedom10086/memory"
+      description: "freedom10086/memory"
+    notification_email: 2351386755@qq.com
+    build_command_prepend: "echo ========"
+    build_command: "mvn package -Dmaven.test.skip=true"
+    branch_pattern: master
+
+
+
+
+
