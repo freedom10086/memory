@@ -22,7 +22,6 @@ addons:
       name: "freedom10086/memory"
       description: "freedom10086/memory"
     notification_email: 2351386755@qq.com
-    build_command_prepend: "echo ========"
     build_command: "mvn package -Dmaven.test.skip=true"
     branch_pattern: master
 
