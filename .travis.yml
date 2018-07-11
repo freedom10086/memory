@@ -2,23 +2,6 @@ language: java
 
 jdk:
   - oraclejdk8
-
-env:
-  global:
-    - secure: "nrSyGX5WI5dsTrKNTRwy5A3N+Or2HPkC3rso6tWIeCTPmPwBgHoujHRYSlCf/psGqg1ucZgLq4KG37xLpkaHd5L3C9tYAuulxqMK4t2Wf/e+Z84jJrm88ZA4Frb69bxhs7IVGB2xHchhiZ1jskQ4ebJFvK/K2kITUqV+bf7ZBtaYhm8RZlGyccsP/eZHORamBEiBzkrroUfeZ1bT3DDZkzezGTNhiFNbCTnUoGEPUTw9a9UbQFmJsW4+MRD0n+OtfwoZ4f1YAZ3dWHbDw18mJk2Np/mTte4phHs14ChxhPf15a5v5SypT+zysi+uw4LAdCaCqC+mRYhLOUDTCQookjR/mfzpPbLwKb9zUjIT7Qu8CUuLowO2boNFJnP4KgqRSZjzXGXG8q5R8cQRRuv/y4FeWnPyK1QrKzI7vZ8nHbW80SEeLa85e2HHI+0H/lvcHe1YMkpnqlA1so/YwMJNdSnLYggqnCMaAfEz2pRMHFgOfDWSQaZ0Vs5fyXVQutInidy1OO5/zTSzSyEs4ZfD18zTrir058j0YlAXPLKSeQrXRageUxkjnchPKLdV/0GO70YflZ3NcPpg8yXGJ900LLBeAmNliLZGuAfp/3f9dm9ehluV2+HCiseU3r2PmRFFomlxKoU/CoLWMX6PiV9K0kK4Ufh8wcvvIeOO3H+6w/o="
-
-before_install:
-  - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
-
-addons:
-  coverity_scan:
-    project:
-      name: "freedom10086/memory"
-      description: "freedom10086/memory"
-    notification_email: 2351386755@qq.com
-    build_command_prepend: "mvn install -DskipTests=true -Dmaven.javadoc.skip=true"
-    build_command: "mvn package -Dmaven.test.skip=true"
-    branch_pattern: master
   
 install: mvn install -DskipTests=true -Dmaven.javadoc.skip=true
 
